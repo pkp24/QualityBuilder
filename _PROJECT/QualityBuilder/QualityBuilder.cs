@@ -66,6 +66,13 @@ namespace QualityBuilder
             Map thingMap = getMapForThing(thing);
             if (thingMap == null)
                 return;
+            // Preserve forbidden state
+            bool wasForbidden = false;
+            var forbiddable = (thing as ThingWithComps)?.GetComp<CompForbiddable>();
+            if (forbiddable != null)
+            {
+                wasForbidden = forbiddable.Forbidden;
+            }
             Designation desOnThing = getDesignationOnThing(thing);
             if (desOnThing != null)
                 thingMap.designationManager.RemoveDesignation(desOnThing);
@@ -73,6 +80,11 @@ namespace QualityBuilder
             if (add)
                 thingMap.designationManager.AddDesignation(new Designation(thing, getDesignationDef(curCat)));
             setSkilledInComp(thing, curCat, add);
+            // Restore forbidden state
+            if (forbiddable != null)
+            {
+                forbiddable.Forbidden = wasForbidden;
+            }
         }
 
         private static void setSkilledInComp(Thing thing, QualityCategory curCat, bool add)
