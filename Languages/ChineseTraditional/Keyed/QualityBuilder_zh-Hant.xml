@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <QualityBuilder>QualityBuilder</QualityBuilder>
+  <QualityBuilderCommand.Label>Quality Builder</QualityBuilderCommand.Label>
+
+  <QualityBuilderOn.Label>設置建築品質</QualityBuilderOn.Label>
+  <QualityBuilderOn.Desc>當前設置: {0}. 設置讓熟練工人來建造家具</QualityBuilderOn.Desc>
+  <QualityBuilder.Already></QualityBuilder.Already>
+
+  <QualityBuilderOff.Label>取消設置建築品質</QualityBuilderOff.Label>
+  <QualityBuilderOff.Desc>當前設置: {0}. 取消設置讓熟練工人來建造家具</QualityBuilderOff.Desc>
+  <QualityBuilder.Nothing></QualityBuilder.Nothing>
+
+  <QualityBuilder.SelectedSettings>所選設定</QualityBuilder.SelectedSettings>
+  <QualityBuilder.CurrentMap>當前地圖</QualityBuilder.CurrentMap>
+  <QualityBuilder.Global>默認設置</QualityBuilder.Global>
+  <QualityBuilder.EnableByDefault>默認啟用建築品質</QualityBuilder.EnableByDefault>
+  <QualityBuilder.IgnoreAtSkill>忽略建築品質的技能值：{0}</QualityBuilder.IgnoreAtSkill>
+  <QualityBuilder.MinQuality>默認最低品質</QualityBuilder.MinQuality>
+  <QualityBuilder.OverrideBestBuilder>讓最好的工人來接替工作</QualityBuilder.OverrideBestBuilder>
+
+</LanguageData>

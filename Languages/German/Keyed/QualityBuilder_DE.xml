@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<QualityBuilder>QualityBuilder</QualityBuilder>
+	<QualityBuilderCommand.Label>Quality Builder</QualityBuilderCommand.Label>
+
+	<QualityBuilderOn.Label>Setze Quality Builder</QualityBuilderOn.Label>
+	<QualityBuilderOn.Desc>Aktuelle Qualität: {0}. Setzt die Einstellung dass nur fähige Arbeiter die gewählten Gebäude bauen</QualityBuilderOn.Desc>
+	<QualityBuilder.Already></QualityBuilder.Already>
+
+	<QualityBuilderOff.Label>Quality Builder entfernen</QualityBuilderOff.Label>
+	<QualityBuilderOff.Desc>Aktuelle Qualität: {0}. Entfernt die Einstellung, dass nur fähige Arbeiter die gewählten Gebäude bauen</QualityBuilderOff.Desc>
+	<QualityBuilder.Nothing></QualityBuilder.Nothing>
+	
+	<QualityBuilder.SelectedSettings>Ausgewählte Einstellungen</QualityBuilder.SelectedSettings>
+	<QualityBuilder.CurrentMap>Aktuelle Karte</QualityBuilder.CurrentMap>
+	<QualityBuilder.Global>Standard Einstellungen</QualityBuilder.Global>
+	<QualityBuilder.EnableByDefault>QualityBuilder standardmäßig aktivieren</QualityBuilder.EnableByDefault>
+	<QualityBuilder.IgnoreAtSkill>Ignoriere QualityBuilder ab skilllevel {0}</QualityBuilder.IgnoreAtSkill>
+	<QualityBuilder.MinQuality>Standard minimale Qualität</QualityBuilder.MinQuality>
+	<QualityBuilder.OverrideBestBuilder>Überschreibe besten Bauarbeiter mit</QualityBuilder.OverrideBestBuilder>
+
+</LanguageData>

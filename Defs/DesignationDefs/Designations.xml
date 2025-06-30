@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+ 
+  <DesignationDef>
+    <defName>SkilledBuilder</defName>
+    <texturePath>Skilled1</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+  <DesignationDef>
+    <defName>SkilledBuilder2</defName>
+    <texturePath>Skilled2</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+  <DesignationDef>
+    <defName>SkilledBuilder3</defName>
+    <texturePath>Skilled3</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+  <DesignationDef>
+    <defName>SkilledBuilder4</defName>
+    <texturePath>Skilled4</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+  <DesignationDef>
+    <defName>SkilledBuilder5</defName>
+    <texturePath>Skilled5</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+  <DesignationDef>
+    <defName>SkilledBuilder6</defName>
+    <texturePath>Skilled6</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+  <DesignationDef>
+    <defName>SkilledBuilder7</defName>
+    <texturePath>Skilled7</texturePath>
+    <targetType>Thing</targetType>
+  </DesignationDef>
+</Defs>

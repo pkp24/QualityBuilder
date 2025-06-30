@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+	
+	<QualityBuilder>Качественное строительство</QualityBuilder>
+	<QualityBuilderCommand.Label>Качественное строительство</QualityBuilderCommand.Label>
+
+	<QualityBuilderOn.Label>Выбрать качественное строительство</QualityBuilderOn.Label>
+	<QualityBuilderOn.Desc>Текущее качество: {0}.Выбрать для строительства умелых рабочих</QualityBuilderOn.Desc>
+	<QualityBuilder.Already></QualityBuilder.Already>
+
+	<QualityBuilderOff.Label>Убрать качественное строительство</QualityBuilderOff.Label>
+	<QualityBuilderOff.Desc>Текущее качество: {0}. Убрать с строительства умелых рабочих.</QualityBuilderOff.Desc>
+	<QualityBuilder.Nothing></QualityBuilder.Nothing>
+
+	<QualityBuilder.SelectedSettings>Выбранные настройки</QualityBuilder.SelectedSettings>
+	<QualityBuilder.CurrentMap>Текущая карта</QualityBuilder.CurrentMap>
+	<QualityBuilder.Global>Настройки по умолчанию</QualityBuilder.Global>
+	<QualityBuilder.EnableByDefault>Включить качественное строительство по умолчанию</QualityBuilder.EnableByDefault>
+	<QualityBuilder.IgnoreAtSkill>Игнорировать качественное строительство по умению {0}</QualityBuilder.IgnoreAtSkill>
+	<QualityBuilder.MinQuality>Минимальное качество по умолчанию</QualityBuilder.MinQuality>
+	<QualityBuilder.OverrideBestBuilder>Переопределить лучшего строителя с</QualityBuilder.OverrideBestBuilder>
+</LanguageData>

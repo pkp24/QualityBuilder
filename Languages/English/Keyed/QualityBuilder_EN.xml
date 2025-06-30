@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+	
+	<QualityBuilder>QualityBuilder</QualityBuilder>
+	<QualityBuilderCommand.Label>Quality Builder</QualityBuilderCommand.Label>
+
+	<QualityBuilderOn.Label>Set Quality Builderer</QualityBuilderOn.Label>
+	<QualityBuilderOn.Desc>Current quality: {0}. Set buildings for skillful workers</QualityBuilderOn.Desc>
+	<QualityBuilder.Already></QualityBuilder.Already>
+
+	<QualityBuilderOff.Label>Unset Quality Builder</QualityBuilderOff.Label>
+	<QualityBuilderOff.Desc>Current quality: {0}. Unset buildings for skillful workers</QualityBuilderOff.Desc>
+	<QualityBuilder.Nothing></QualityBuilder.Nothing>
+
+	<QualityBuilder.SelectedSettings>Selected settings</QualityBuilder.SelectedSettings>
+	<QualityBuilder.CurrentMap>Current map</QualityBuilder.CurrentMap>
+	<QualityBuilder.Global>Default settings</QualityBuilder.Global>
+	<QualityBuilder.EnableByDefault>Enable QualityBuilder by default</QualityBuilder.EnableByDefault>
+	<QualityBuilder.IgnoreAtSkill>Ignore QualityBuilder at skill {0}</QualityBuilder.IgnoreAtSkill>
+	<QualityBuilder.MinQuality>Default minimum quality</QualityBuilder.MinQuality>
+	<QualityBuilder.OverrideBestBuilder>Override best builder with</QualityBuilder.OverrideBestBuilder>
+</LanguageData>

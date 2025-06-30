@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+	
+	<QualityBuilder>Constructor de calidad (QualityBuilder)</QualityBuilder>
+	<QualityBuilderCommand.Label>Constructor de calidad</QualityBuilderCommand.Label>
+
+	<QualityBuilderOn.Label>Activar constructor de calidad</QualityBuilderOn.Label>
+	<QualityBuilderOn.Desc>Calidad actual: {0}. Clic para reservar construcciones a los trabajadores calificados</QualityBuilderOn.Desc>
+	<QualityBuilder.Already></QualityBuilder.Already>
+
+	<QualityBuilderOff.Label>Desactivar construcción de calidad</QualityBuilderOff.Label>
+	<QualityBuilderOff.Desc>Calidad actual: {0}. Clic para no reservar construcciones a los trabajadores calificados</QualityBuilderOff.Desc>
+	<QualityBuilder.Nothing></QualityBuilder.Nothing>
+
+	<QualityBuilder.SelectedSettings>Configuración seleccionada</QualityBuilder.SelectedSettings>
+	<QualityBuilder.CurrentMap>Mapa actual</QualityBuilder.CurrentMap>
+	<QualityBuilder.Global>Configuración predeterminada</QualityBuilder.Global>
+	<QualityBuilder.EnableByDefault>Activar QualityBuilder por defecto</QualityBuilder.EnableByDefault>
+	<QualityBuilder.IgnoreAtSkill>Ignorar QualityBuilder al nivel de habilidad {0}</QualityBuilder.IgnoreAtSkill>
+	<QualityBuilder.MinQuality>Calidad mínima por defecto</QualityBuilder.MinQuality>
+	<QualityBuilder.OverrideBestBuilder>Reemplazar al mejor constructor por</QualityBuilder.OverrideBestBuilder>
+
+</LanguageData>
