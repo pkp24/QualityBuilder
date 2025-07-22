@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+	
+	<QualityBuilder>QualityBuilder</QualityBuilder>
+	<QualityBuilderCommand.Label>Quality Builder</QualityBuilderCommand.Label>
+
+	<QualityBuilderOn.Label>Ativar construtor de qualidade</QualityBuilderOn.Label>
+	<QualityBuilderOn.Desc>Qualidade Atual: {0}. Clique para definir construções para colonos qualificados</QualityBuilderOn.Desc>
+	<QualityBuilder.Already></QualityBuilder.Already>
+
+	<QualityBuilderOff.Label>Desativar construtor de qualidade</QualityBuilderOff.Label>
+	<QualityBuilderOff.Desc>Qualidade Atual: {0}. Clique para remover colonos desta construção de qualidade</QualityBuilderOff.Desc>
+	<QualityBuilder.Nothing></QualityBuilder.Nothing>
+
+	<QualityBuilder.SelectedSettings>Configuração Selecionada</QualityBuilder.SelectedSettings>
+	<QualityBuilder.CurrentMap>Mapa Atual</QualityBuilder.CurrentMap>
+	<QualityBuilder.Global>Configuração Padrão</QualityBuilder.Global>
+	<QualityBuilder.EnableByDefault>Sempre Ativar QualityBuilder por padrão</QualityBuilder.EnableByDefault>
+	<QualityBuilder.IgnoreAtSkill>Ignorar QualityBuilder quando atingir o nível {0} de habilidade</QualityBuilder.IgnoreAtSkill>
+	<QualityBuilder.MinQuality>Qualidade minima padrão</QualityBuilder.MinQuality>
+	<QualityBuilder.OverrideBestBuilder>Substituir o melhor construtor por</QualityBuilder.OverrideBestBuilder>
+
+</LanguageData>
