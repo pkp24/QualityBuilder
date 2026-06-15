@@ -17,6 +17,8 @@
 	<QualityBuilder.Global>Default settings</QualityBuilder.Global>
 	<QualityBuilder.EnableByDefault>Enable QualityBuilder by default</QualityBuilder.EnableByDefault>
 	<QualityBuilder.IgnoreAtSkill>Ignore QualityBuilder at skill {0}</QualityBuilder.IgnoreAtSkill>
+	<QualityBuilder.MinSkill>Quality builds require construction skill {0} (best builder: {1})</QualityBuilder.MinSkill>
+	<QualityBuilder.MinSkillDiff>Allow builders up to {0} skill levels below the best builder</QualityBuilder.MinSkillDiff>
 	<QualityBuilder.MinQuality>Default minimum quality</QualityBuilder.MinQuality>
 	<QualityBuilder.OverrideBestBuilder>Override best builder with</QualityBuilder.OverrideBestBuilder>
 </LanguageData>

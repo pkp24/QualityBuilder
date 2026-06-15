@@ -1,9 +1,6 @@
 using HarmonyLib;
 using RimWorld;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using Verse;
 using Verse.AI;
 
@@ -14,12 +11,40 @@ namespace QualityBuilder
 	{
         public static void Postfix(ref Job __result, Pawn pawn, Thing t, bool forced = false)
 		{
-            if (!forced && QualityBuilder.hasDesignation(t))
+            if (!QualityBuilder.hasDesignation(t))
+                return;
+            if (!forced && !isPawnGoodEnoughToBuild(pawn))
             {
-                if (!isPawnGoodEnoughToBuild(pawn))
-                    __result = null;
+                __result = null;
+                return;
             }
+            // The pawn is allowed to finish this quality frame (qualified, or player forced).
+            // A low-skill pawn builds much slower, so if one is already constructing this same
+            // frame (job started before the designation, or via a race), kick them off so the
+            // better builder takes over. Player-forced builders are never kicked.
+            if (__result != null)
+                kickUnqualifiedBuilders(t, pawn);
 		}
+
+        private static void kickUnqualifiedBuilders(Thing frame, Pawn replacement)
+        {
+            Map map = frame.Map;
+            if (map == null)
+                return;
+            List<Pawn> pawns = map.mapPawns.PawnsInFaction(Faction.OfPlayer);
+            for (int i = 0; i < pawns.Count; i++)
+            {
+                Pawn p = pawns[i];
+                if (p == replacement || p.jobs == null)
+                    continue;
+                Job job = p.jobs.curJob;
+                if (job == null || job.def != JobDefOf.FinishFrame || job.targetA.Thing != frame)
+                    continue;
+                if (job.playerForced || isPawnGoodEnoughToBuild(p))
+                    continue;
+                p.jobs.EndCurrentJob(JobCondition.InterruptForced, true, true);
+            }
+        }
 
         public static bool isPawnGoodEnoughToBuild(Pawn pawn)
         {
@@ -32,7 +57,8 @@ namespace QualityBuilder
             }
             Map curMap = pawn.Map;
             Pawn overridePawn = QualityBuilderModSettings.getBestConstructorOverride(curMap);
-            if (overridePawn != null)
+            // A dead/gone/incapable override must not block all quality construction
+            if (overridePawn != null && !overridePawn.Dead && !overridePawn.Destroyed && QualityBuilder.pawnCanConstruct(overridePawn))
                 return pawn == overridePawn;
             int curPawnLevel = QualityBuilder.getPawnConstructionSkill(pawn);
             if (QualityBuilderModSettings.getIgnoreQualityBuilderAtSkill(curMap) > curPawnLevel)

@@ -367,10 +367,22 @@ FodyWeavers.xsd
 *.sln.iml
 
 # RimWorld specific
+# Harmony is provided by the official Harmony mod (brrainz.harmony) at runtime — never bundle it
+0Harmony.dll
 0Harmony.xml
 /packages
 /_PublisherPlus.xml
 RimWorldAPI/
+
+# QualityBuilder build outputs (intermediate — the shipped DLLs live in Versions/v1.x/Assemblies/)
+/TargetAssemblies/
+/Build_Assemblies/
+
+# NuGet (PackageReference restores to the global cache; never commit local copies)
+*.nupkg
+*.snupkg
+.nuget/
+nuget.exe
 
 # OS generated files
 .DS_Store

@@ -22,6 +22,7 @@ namespace QualityBuilder
 
         public QualityBuilderMod(ModContentPack content) : base(content)
         {
+            QualityBuilder.modInstance = this;
             settings = GetSettings<QualityBuilderGlobalModSettings>();
             var harmony = new Harmony("de.hatti.rimworld.mod.qualitybuilder");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
@@ -95,6 +96,24 @@ namespace QualityBuilder
             firstRowList.Label("QualityBuilder.IgnoreAtSkill".Translate(ignoreAtSkill.ToString()));
             int num = Mathf.RoundToInt(firstRowList.Slider((float)currentSelectedSetting.ignoreQualityBuilderAtSkill, 0f, 20f));
             currentSelectedSetting.ignoreQualityBuilderAtSkill = num;
+            // Minimum construction skill for quality builds, anchored to the best constructor.
+            // Stored as a difference from the best so it keeps tracking level-ups.
+            int bestSkill = 0;
+            if (isCurentMapSelected && Find.CurrentMap != null)
+                bestSkill = QualityBuilderModSettings.getBestConstructionSkill(Find.CurrentMap);
+            if (bestSkill > 0)
+            {
+                int curMinSkill = Mathf.Clamp(bestSkill - currentSelectedSetting.skillDifferenceFromBestBuilder, 0, bestSkill);
+                firstRowList.Label("QualityBuilder.MinSkill".Translate(curMinSkill, bestSkill));
+                int newMinSkill = Mathf.RoundToInt(firstRowList.Slider((float)curMinSkill, 0f, (float)bestSkill));
+                currentSelectedSetting.skillDifferenceFromBestBuilder = bestSkill - newMinSkill;
+            }
+            else
+            {
+                int diff = Mathf.Clamp(currentSelectedSetting.skillDifferenceFromBestBuilder, 0, 20);
+                firstRowList.Label("QualityBuilder.MinSkillDiff".Translate(diff));
+                currentSelectedSetting.skillDifferenceFromBestBuilder = Mathf.RoundToInt(firstRowList.Slider((float)diff, 0f, 20f));
+            }
             // Default quality
             if (firstRowList.ButtonTextLabeled("QualityBuilder.MinQuality".Translate(), getMinQualityName()))
                 buildMinQualityFloatMenu();

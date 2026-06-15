@@ -29,7 +29,6 @@ namespace QualityBuilder
             this.ignoreQualityBuilderAtSkill = clone.ignoreQualityBuilderAtSkill;
             this.defaultUseQualityBuilder = clone.defaultUseQualityBuilder;
             this.defaultMinQualitySetting = clone.defaultMinQualitySetting;
-            this.bestConstructorOverride = clone.bestConstructorOverride;
         }
 
         public Pawn bestConstructorOverride

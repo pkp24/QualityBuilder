@@ -70,7 +70,7 @@ namespace QualityBuilder
 		{
             ToggleCommand command_Toggle = new ToggleCommand();
             command_Toggle.hotKey = KeyBindingDefOf.Misc1;
-			command_Toggle.icon = ContentFinder<Texture2D>.Get("Skilled", true);
+			command_Toggle.icon = QualityBuilderStartup.SkilledTex;
 			command_Toggle.isActive = new Func<bool>(this.IsSkilledActive);
 			command_Toggle.toggleAction = new Action(this.ToggleSkilled);
             command_Toggle.defaultLabel = Translator.Translate("QualityBuilderCommand.Label");

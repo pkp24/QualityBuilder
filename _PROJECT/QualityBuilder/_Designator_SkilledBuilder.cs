@@ -16,10 +16,8 @@ namespace QualityBuilder
 		{
 			this.defaultLabel = Translator.Translate("QualityBuilderOn.Label");
 			this.defaultDesc = Translator.Translate("QualityBuilderOn.Desc");
-            LongEventHandler.ExecuteWhenFinished(delegate
-            {
-                this.icon = ContentFinder<Texture2D>.Get("Skilled", true);
-            });
+			this.icon = QualityBuilderStartup.SkilledTex;
+			this.isOrder = true;
             this.soundDragSustain = SoundDefOf.Designate_DragStandard;
 			this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
 			this.useMouseIcon = true;
