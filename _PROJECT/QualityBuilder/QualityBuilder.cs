@@ -42,28 +42,6 @@ namespace QualityBuilder
 			return GetFirstBuildingBuildingOrFrame(Find.CurrentMap, c);
 		}
 
-		// Defensive cleanup for QB's deconstruct->rebuild churn. Releases any lingering
-		// reservations on the construction thing(s) at a cell (blueprint/frame/QB-managed
-		// building) before a replacement blueprint is placed there. Without this, a stale
-		// FinishFrame reservation (maxPawns 1) left on the old construction can collide with
-		// vanilla's reserve of the rebuilt frame in
-		// Toils_Construct.MakeSolidThingFromBlueprintIfNecessary (which reserves the new frame
-		// with maxPawns 5), producing a harmless-but-noisy "Could not reserve" red error.
-		public static void releaseConstructionReservations(Map map, IntVec3 cell)
-		{
-			if (map == null || !cell.InBounds(map))
-				return;
-			List<Thing> things = map.thingGrid.ThingsListAt(cell);
-			for (int i = things.Count - 1; i >= 0; i--)
-			{
-				Thing t = things[i];
-				if (t == null)
-					continue;
-				if (t.def.IsBlueprint || t.def.IsFrame || getCompQualityBuilder(t) != null)
-					map.reservationManager.ReleaseAllForTarget(t);
-			}
-		}
-
 		public static DesignationDef getDesignationDef(QualityCategory cat)
 		{
 			DesignationDef[] defs = getSkilledDesignationDefs();
@@ -71,6 +49,20 @@ namespace QualityBuilder
 			if (index < 0 || index >= defs.Length)
 				index = 0;
 			return defs[index];
+		}
+
+		// Reverse of getDesignationDef: which min quality a SkilledBuilder* designation stands
+		// for. The designation manager is scribed with the map, so on load this is more
+		// trustworthy than the comp's scribed values from old saves.
+		public static QualityCategory? getQualityForDesignationDef(DesignationDef def)
+		{
+			if (def == null)
+				return null;
+			DesignationDef[] defs = getSkilledDesignationDefs();
+			for (int i = 0; i < defs.Length; i++)
+				if (defs[i] == def)
+					return (QualityCategory)i;
+			return null;
 		}
 
 		public static bool hasDesignation(Thing t)
@@ -127,6 +119,17 @@ namespace QualityBuilder
 				return;
 			cmp.isSkilled = add;
 			cmp.desiredMinQuality = curCat;
+			if (!add && cmp.pendingQualityRebuild)
+			{
+				// Opting out cancels a pending quality redo: clear the flag and remove QB's
+				// own deconstruct order (only QB-initiated ones — the flag is never set for
+				// player-ordered deconstructions).
+				cmp.pendingQualityRebuild = false;
+				Map map = getMapForThing(thing);
+				Designation decon = map?.designationManager.DesignationOn(thing, DesignationDefOf.Deconstruct);
+				if (decon != null)
+					map.designationManager.RemoveDesignation(decon);
+			}
 		}
 
 		public static CompQualityBuilder getCompQualityBuilder(Thing thing)
@@ -144,12 +147,34 @@ namespace QualityBuilder
 
 		public static Map getMapForThing(Thing thing)
 		{
-			if (thing == null)
-				return null;
-			Map curMap = thing.Map;
-			if (curMap == null)
-				curMap = Find.CurrentMap;
-			return curMap;
+			return thing?.Map;
+		}
+
+		// Copy ideology style (source precept + style def) onto a rebuilt blueprint/frame.
+		// Prefers the CompStyleable component; falls back to the Thing-level style API
+		// (and Blueprint.InheritStyle) when the comp is absent. Shared by the
+		// construction-failed and deconstruct->rebuild paths.
+		public static void applyStyle(ThingWithComps dest, Precept_ThingStyle sourcePrecept, ThingStyleDef sourceStyleDef)
+		{
+			if (dest == null)
+				return;
+			CompStyleable comp = dest.GetComp<CompStyleable>();
+			if (comp != null)
+			{
+				if (sourcePrecept != null)
+					comp.SourcePrecept = sourcePrecept;
+				if (sourceStyleDef != null)
+					comp.styleDef = sourceStyleDef;
+			}
+			else
+			{
+				if (sourcePrecept != null)
+					dest.StyleSourcePrecept = sourcePrecept;
+				if (sourceStyleDef != null)
+					dest.StyleDef = sourceStyleDef;
+				if (dest is Blueprint bp)
+					bp.InheritStyle(sourcePrecept, sourceStyleDef);
+			}
 		}
 
 		internal static QualityBuilderMod modInstance;
@@ -197,6 +222,13 @@ namespace QualityBuilder
 			for (int i = 0; i < pawns.Count; i++)
 			{
 				Pawn p = pawns[i];
+				// Only pawns actually available to build may set the quality threshold:
+				// PawnsInFaction also returns unspawned held pawns (cryptosleep caskets,
+				// carried) and imprisoned colonists, and counting a downed/broken best
+				// builder would deadlock all quality construction. Drafted pawns are NOT
+				// excluded — that's a temporary state and would cause churn.
+				if (!p.Spawned || p.Downed || p.IsPrisoner || p.InMentalState)
+					continue;
 				if (!pawnCanConstruct(p))
 					continue;
 				int skill = getPawnConstructionSkill(p);

@@ -13,6 +13,7 @@ namespace QualityBuilder
     public class QualityBuilderMod : Verse.Mod
     {
         public static string REPLACESTUFF_MOD_NAME = "Replace Stuff";
+        public static string REPLACESTUFF_PACKAGE_ID = "Uuugggg.ReplaceStuff";
         public static string RS_TYPE_GENREPLACE = "Replace_Stuff.GenReplace";
 
         private QualityBuilderGlobalModSettings settings;
@@ -32,34 +33,35 @@ namespace QualityBuilder
 
         private void patchReplaceStuff(Harmony harmony)
         {
-            var available = LoadedModManager.RunningMods.Any(mod => mod.Name == REPLACESTUFF_MOD_NAME);
+            // Detect by packageId first (stable across renames/translations), display name as
+            // fallback for very old Replace Stuff releases.
+            var rsMod = LoadedModManager.RunningMods.FirstOrDefault(mod =>
+                REPLACESTUFF_PACKAGE_ID.Equals(mod.PackageId, StringComparison.OrdinalIgnoreCase)
+                || mod.Name == REPLACESTUFF_MOD_NAME);
+            if (rsMod == null)
+                return;
 
-            if (available)
+            try
             {
-                try
-                {
-                    // get the assembly
-                    var RS_assembly = LoadedModManager
-                                        .RunningMods.First(mod => mod.Name == REPLACESTUFF_MOD_NAME)
-                                        .assemblies.loadedAssemblies.First(a => !a.FullName.StartsWith("0"));
-                    if (RS_assembly == null)
-                        throw new Exception("Replace Stuff not available");
-                    var rsGenReplaceType = RS_assembly.GetType(RS_TYPE_GENREPLACE);
-                    if (rsGenReplaceType == null)
-                        throw new Exception("GenReplace type is not available. Loaded assemblyName " + RS_assembly.FullName);
-                    var rsMethod = rsGenReplaceType.GetMethod("PlaceReplaceFrame");
-                    if (rsMethod == null)
-                        throw new Exception("Replace Stuff method to patch not available");
-                    var postFix = typeof(Patch_ReplaceStuff).GetMethod("PostFix_PlaceReplaceFrame");
-                    harmony.Patch(rsMethod, null, new HarmonyMethod(postFix));
-                    Log.Message("QualityBuilder successfully patched Replace Stuff");
-                }
-                catch
-                {
-                    Log.Error("QualityBuilder is unable to patch Replace Stuff");
-                    throw;
-                }
-
+                // Pick the assembly that actually contains the expected type instead of
+                // guessing by name.
+                var rsGenReplaceType = rsMod.assemblies.loadedAssemblies
+                                            .Select(a => a.GetType(RS_TYPE_GENREPLACE))
+                                            .FirstOrDefault(t => t != null);
+                if (rsGenReplaceType == null)
+                    throw new Exception("GenReplace type is not available in any Replace Stuff assembly");
+                var rsMethod = rsGenReplaceType.GetMethod("PlaceReplaceFrame");
+                if (rsMethod == null)
+                    throw new Exception("Replace Stuff method to patch not available");
+                var postFix = typeof(Patch_ReplaceStuff).GetMethod("PostFix_PlaceReplaceFrame");
+                harmony.Patch(rsMethod, null, new HarmonyMethod(postFix));
+                Log.Message("QualityBuilder successfully patched Replace Stuff");
+            }
+            catch (Exception ex)
+            {
+                // Don't rethrow: throwing out of the Mod constructor unregisters the settings
+                // handle. QualityBuilder works without the Replace Stuff integration.
+                Log.Warning("QualityBuilder is unable to patch Replace Stuff; continuing without Replace Stuff integration. " + ex);
             }
         }
 
@@ -87,6 +89,18 @@ namespace QualityBuilder
             if (firstRowList.ButtonTextLabeled("QualityBuilder.SelectedSettings".Translate(), isCurentMapSelected ? "QualityBuilder.CurrentMap".Translate() : "QualityBuilder.Global".Translate()))
                 buildSelectedSettingsFloatMenu();
             firstRowList.Gap(12f);
+            // Whether this map uses its own settings; when off, the global "Default settings"
+            // page drives QualityBuilder on this map (see QualityBuilderModSettings.getSettings).
+            if (isCurentMapSelected)
+            {
+                QualityBuilder_MapComponent mapComp = QualityBuilder_MapComponent.getAndEnsure(Find.CurrentMap);
+                if (mapComp != null)
+                {
+                    bool useMapSettings = mapComp.useMapSettings;
+                    firstRowList.CheckboxLabeled("QualityBuilder.UseMapSettings".Translate(), ref useMapSettings, null);
+                    mapComp.useMapSettings = useMapSettings;
+                }
+            }
             // defaultUseQualityBuilder
             bool defaultUseQualityBuilder = currentSelectedSetting.defaultUseQualityBuilder;
             firstRowList.CheckboxLabeled("QualityBuilder.EnableByDefault".Translate(), ref defaultUseQualityBuilder, null);

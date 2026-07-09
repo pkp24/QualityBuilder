@@ -8,7 +8,10 @@ namespace QualityBuilder
 {
 	public class _Designator_SkilledBuilder : Designator
 	{
-        private static QualityCategory? curQualityCat;
+        // Instance field: designators are re-instantiated by ResolveDesignators, so the
+        // right-click quality choice no longer leaks across maps/saves. While null,
+        // getDesiredQuality falls back to the current map's configured default min quality.
+        private QualityCategory? curQualityCat;
 
 		public override DrawStyleCategoryDef DrawStyleCategory => DrawStyleCategoryDefOf.FilledRectangle;
 

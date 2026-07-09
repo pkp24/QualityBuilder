@@ -59,6 +59,11 @@ namespace QualityBuilder
 		{
 			if (!"Orders".EqualsIgnoreCase(__instance.defName))
 				return;
+			// Guard against double-injection if the list is re-resolved without being cleared
+			// first (vanilla ResolveDesignators clears, but another mod's patch might not).
+			for (int i = 0; i < ___resolvedDesignators.Count; i++)
+				if (___resolvedDesignators[i] is _Designator_SkilledBuilder)
+					return;
 			___resolvedDesignators.Add(new _Designator_SkilledBuilder());
 			___resolvedDesignators.Add(new _Designator_UnSkilledBuilder());
 		}

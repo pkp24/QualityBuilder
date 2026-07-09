@@ -7,8 +7,24 @@ namespace QualityBuilder
 	[HarmonyPatch(typeof(JobDriver_Deconstruct), "FinishedRemoving")]
 	public static class _JobDriver_Deconstruct_FinishedRemoving
 	{
+		// FinishedRemoving destroys the building before the Postfix runs (so thing.Map is null
+		// by then). Capture the map in a Prefix while the building is still spawned, so a pawn
+		// that despawns at job end doesn't cause the rebuild to be skipped and the building lost.
+		// Game logic is single-threaded and FinishedRemoving isn't reentrant, so a static
+		// handoff field between Prefix and Postfix is safe.
+		private static Map capturedMap;
+
+		public static void Prefix(JobDriver_Deconstruct __instance)
+		{
+			Thing thing = __instance.job?.targetA.Thing;
+			capturedMap = thing?.Map ?? __instance.pawn?.Map;
+		}
+
 		public static void Postfix(JobDriver_Deconstruct __instance)
 		{
+			Map curMap = capturedMap ?? __instance.pawn?.Map;
+			capturedMap = null;
+
 			// Get the original building info before it was destroyed
 			LocalTargetInfo target = __instance.job.targetA;
 			Thing thing = target.Thing;
@@ -20,7 +36,13 @@ namespace QualityBuilder
 			if (cmp == null || !cmp.isSkilled || cmp.isDesiredMinQualityReached)
 				return;
 
-			Map curMap = __instance.pawn?.Map;
+			// Only rebuild when QB itself designated this deconstruction as a quality redo
+			// (flag set in _JobDriver_ConstructFinishFrame.afterFinishToil). Player-ordered
+			// deconstructions of a below-min building must never be hijacked into a rebuild.
+			if (!cmp.pendingQualityRebuild)
+				return;
+			cmp.pendingQualityRebuild = false;
+
 			if (curMap == null)
 				return;
 
@@ -34,12 +56,13 @@ namespace QualityBuilder
 			ThingDef stuffDef = thing.Stuff;
 			ThingDef buildingDef = thing.def;
 
-			// Clear any lingering reservations on the old building and the cell before placing
-			// the rebuild blueprint, so a stale FinishFrame reservation can't survive into the
-			// rebuilt frame and collide with vanilla's reserve in
-			// Toils_Construct.MakeSolidThingFromBlueprintIfNecessary.
+			// Clear any lingering reservations on the old building before placing the rebuild
+			// blueprint, so a stale FinishFrame reservation can't survive into the rebuilt
+			// frame and collide with vanilla's reserve in
+			// Toils_Construct.MakeSolidThingFromBlueprintIfNecessary. Only the exact thing
+			// being replaced is released — other things at the cell may be legitimately
+			// reserved by other pawns' jobs.
 			curMap.reservationManager.ReleaseAllForTarget(thing);
-			QualityBuilder.releaseConstructionReservations(curMap, center);
 
 			// Create new blueprint with ideology style preserved
 			Blueprint newBP = GenConstruct.PlaceBlueprintForBuild(buildingDef, center, curMap, rotation, Faction.OfPlayer, stuffDef);
@@ -50,37 +73,13 @@ namespace QualityBuilder
 				return;
 			}
 			newBPCmp.desiredMinQuality = cmp.desiredMinQuality;
+			// Carry the redo counter through the rebuild cycle so an unreachable min quality
+			// can't loop forever (see afterFinishToil's attempt cap).
+			newBPCmp.qualityRebuildAttempts = cmp.qualityRebuildAttempts;
 			QualityBuilder.setSkilled(newBP, cmp.desiredMinQuality, cmp.isSkilled);
 
 			// Restore ideology settings to the new blueprint
-			CompStyleable compStyleable = newBP.GetComp<CompStyleable>();
-			if (compStyleable != null)
-			{
-				if (originalStyleSourcePrecept != null)
-				{
-					compStyleable.SourcePrecept = originalStyleSourcePrecept;
-				}
-
-				if (originalStyleDef != null)
-				{
-					compStyleable.styleDef = originalStyleDef;
-				}
-			}
-			else
-			{
-				// Fallback to the old method
-				if (originalStyleSourcePrecept != null)
-				{
-					newBP.StyleSourcePrecept = originalStyleSourcePrecept;
-				}
-
-				if (originalStyleDef != null)
-				{
-					newBP.StyleDef = originalStyleDef;
-				}
-
-				newBP.InheritStyle(originalStyleSourcePrecept, originalStyleDef);
-			}
+			QualityBuilder.applyStyle(newBP, originalStyleSourcePrecept, originalStyleDef);
 		}
 	}
 }

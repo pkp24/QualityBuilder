@@ -25,7 +25,9 @@ namespace QualityBuilder
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<bool>(ref this.useMapSettingsInternal, "qbUseMapSettings", false);
+            // Default true: saves from versions without this flag (and fresh maps) keep the
+            // historical behavior of using per-map settings.
+            Scribe_Values.Look<bool>(ref this.useMapSettingsInternal, "qbUseMapSettings", true);
             if (settings == null)
                 settings = new QualityBuilderModSettings(QualityBuilderGlobalModSettings.getSettings());
             settings.ExposeData();

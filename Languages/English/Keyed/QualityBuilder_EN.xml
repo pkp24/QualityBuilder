@@ -21,4 +21,6 @@
 	<QualityBuilder.MinSkillDiff>Allow builders up to {0} skill levels below the best builder</QualityBuilder.MinSkillDiff>
 	<QualityBuilder.MinQuality>Default minimum quality</QualityBuilder.MinQuality>
 	<QualityBuilder.OverrideBestBuilder>Override best builder with</QualityBuilder.OverrideBestBuilder>
+	<QualityBuilder.UseMapSettings>Use these map settings (off = use default settings)</QualityBuilder.UseMapSettings>
+	<QualityBuilder.RebuildGaveUp>QualityBuilder gave up on {0} after {1} rebuild attempts (last quality: {2}). The building was kept.</QualityBuilder.RebuildGaveUp>
 </LanguageData>

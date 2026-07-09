@@ -7,20 +7,20 @@ namespace QualityBuilder
     [HarmonyPatch(typeof(ThingUtility), "CheckAutoRebuildOnDestroyed")]
     class Patch_ThingUtillity
     {
-        public static void Postfix(Thing thing, DestroyMode mode, Map map, BuildableDef buildingDef)
+        // CheckAutoRebuildOnDestroyed returns the auto-rebuild blueprint it placed (or null),
+        // so use __result directly instead of re-deriving vanilla's placement condition and
+        // scanning the cell.
+        public static void Postfix(Thing thing, Blueprint_Build __result)
         {
-            if (!(Find.PlaySettings.autoRebuild && mode == DestroyMode.KillFinalize && thing.Faction == Faction.OfPlayer && buildingDef.blueprintDef != null && buildingDef.IsResearchFinished && map.areaManager.Home[thing.Position]))
+            if (__result == null)
                 return;
             var cmp = QualityBuilder.getCompQualityBuilder(thing);
             if (cmp == null)
                 return;
-            var newBuilding = QualityBuilder.GetFirstBuildingBuildingOrFrame(map, thing.Position);
-            if (newBuilding == null)
-                return;
-            var newComp = QualityBuilder.getCompQualityBuilder(newBuilding);
+            var newComp = QualityBuilder.getCompQualityBuilder(__result);
             if (newComp == null)
                 return;
-            QualityBuilder.setSkilled(newBuilding, cmp.desiredMinQuality, cmp.isSkilled);
+            QualityBuilder.setSkilled(__result, cmp.desiredMinQuality, cmp.isSkilled);
         }
     }
 }

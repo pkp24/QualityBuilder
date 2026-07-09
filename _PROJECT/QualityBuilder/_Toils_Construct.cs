@@ -47,6 +47,9 @@ namespace QualityBuilder
 					if (cmpCreated == null)
 						return;
 					cmpCreated.desiredMinQuality = cmpBlueprint.desiredMinQuality;
+					// Carry the quality-redo counter across the blueprint->frame swap so the
+					// deconstruct->rebuild loop-breaker keeps counting.
+					cmpCreated.qualityRebuildAttempts = cmpBlueprint.qualityRebuildAttempts;
 					if (!QualityBuilder.hasDesignation(created))
 						QualityBuilder.setSkilled(created, cmpCreated.desiredMinQuality, cmpBlueprint.isSkilled);
 				}

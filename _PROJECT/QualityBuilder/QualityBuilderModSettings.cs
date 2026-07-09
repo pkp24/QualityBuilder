@@ -80,14 +80,15 @@ namespace QualityBuilder
             this.bestConstructionSkillInternal = 0;
         }
 
-        private static QualityBuilderModSettings getSettings(Map map)
+        internal static QualityBuilderModSettings getSettings(Map map)
         {
             QualityBuilderModSettings settings = null;
             if (map != null)
             {
                 QualityBuilder_MapComponent mapComp = QualityBuilder_MapComponent.getAndEnsure(map);
-                //if (mapComp != null && mapComp.useMapSettings)
-                if (mapComp != null)
+                // When the map opts out of per-map settings, fall through to the global
+                // ("Default settings") page so it actually affects the current game.
+                if (mapComp != null && mapComp.useMapSettings)
                     settings = mapComp.settings;
             }
             if (settings == null)
@@ -109,18 +110,22 @@ namespace QualityBuilder
 
         public static int getBestConstructionSkill(Map map)
         {
-            var mapSettings = getSettings(map);
-            if (mapSettings.bestConstructorCheckWatch == null)
-                mapSettings.bestConstructorCheckWatch = new Stopwatch();
-            if (mapSettings.bestConstructorCheckWatch.ElapsedMilliseconds > 10000 || !mapSettings.bestConstructorCheckWatch.IsRunning) // 10 seconds
+            return getSettings(map).getBestConstructionSkillCached(map);
+        }
+
+        public int getBestConstructionSkillCached(Map map)
+        {
+            if (bestConstructorCheckWatch == null)
+                bestConstructorCheckWatch = new Stopwatch();
+            if (bestConstructorCheckWatch.ElapsedMilliseconds > 10000 || !bestConstructorCheckWatch.IsRunning) // 10 seconds
             {
-                mapSettings.bestConstructionSkillInternal = QualityBuilder.getBestConstructorSkill(map);
+                bestConstructionSkillInternal = QualityBuilder.getBestConstructorSkill(map);
 #if DEBUG
-                Log.Message("QualityBuilder recalc best pawn with best skill " + mapSettings.bestConstructionSkillInternal);
+                Log.Message("QualityBuilder recalc best pawn with best skill " + bestConstructionSkillInternal);
 #endif
-                mapSettings.bestConstructorCheckWatch.Restart();
+                bestConstructorCheckWatch.Restart();
             }
-            return mapSettings.bestConstructionSkillInternal;
+            return bestConstructionSkillInternal;
         }
 
         public static int getIgnoreQualityBuilderAtSkill(Map map)

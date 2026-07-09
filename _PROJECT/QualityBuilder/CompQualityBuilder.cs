@@ -13,10 +13,31 @@ namespace QualityBuilder
         QualityCategory desiredMinQualityRef = QualityCategory.Awful;
 
         bool desiredMinQualityReached;
+        // Set only when QualityBuilder itself designates a deconstruct-for-quality redo.
+        // Gates the auto-rebuild in _JobDriver_Deconstruct so player-ordered deconstructions
+        // are never hijacked into a rebuild.
+        bool pendingQualityRebuildInternal;
+        // How many quality redos QB has already started for this building; carried across
+        // the deconstruct->blueprint->frame->building cycle so an unreachable min quality
+        // can't burn materials forever.
+        int qualityRebuildAttemptsInternal;
+
         public bool isDesiredMinQualityReached
         {
             get { return desiredMinQualityReached; }
             set { this.desiredMinQualityReached = value; }
+        }
+
+        public bool pendingQualityRebuild
+        {
+            get { return pendingQualityRebuildInternal; }
+            set { this.pendingQualityRebuildInternal = value; }
+        }
+
+        public int qualityRebuildAttempts
+        {
+            get { return qualityRebuildAttemptsInternal; }
+            set { this.qualityRebuildAttemptsInternal = value; }
         }
 
         public bool isSkilled
@@ -45,23 +66,46 @@ namespace QualityBuilder
                 skilled = QualityBuilderModSettings.getDefaultUseQualityBuilder(parent.Map);
                 QualityBuilder.setSkilled(parent, this.desiredMinQuality, true);
             }
-            else if (respawningAfterLoad && (parent.def.IsBlueprint || parent.def.IsFrame) &&QualityBuilder.hasDesignation(parent))
+            else if (respawningAfterLoad && (parent.def.IsBlueprint || parent.def.IsFrame))
             {
-                QualityBuilder.setSkilled(parent, this.desiredMinQuality, skilled);
+                // On load the designation manager (scribed with the map) is the source of
+                // truth: old saves scribed skilled/desiredMinQuality against dynamic defaults,
+                // so those values can be wrong. Adopt an existing QB designation instead of
+                // clobbering it from possibly-wrong scribed values.
+                Designation des = QualityBuilder.getDesignationOnThing(parent);
+                if (des != null)
+                {
+                    skilled = true;
+                    QualityCategory? desCat = QualityBuilder.getQualityForDesignationDef(des.def);
+                    if (desCat.HasValue)
+                        desiredMinQualityRef = desCat.Value;
+                }
+                else if (skilled)
+                {
+                    // Scribed as skilled but the designation is missing — restore it.
+                    QualityBuilder.setSkilled(parent, this.desiredMinQuality, true);
+                }
             }
         }
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Values.Look<bool>(ref this.skilled, "Quality", QualityBuilderModSettings.getDefaultUseQualityBuilder(parent.Map), false);
-            Scribe_Values.Look<QualityCategory>(ref this.desiredMinQualityRef, "desiredMinQuality", QualityBuilderModSettings.getDefaultMinQualitySetting(parent.Map), false);
+            // Constant defaults only: parent.Map is non-null on save but null on load, so a
+            // dynamic default omits values on save and reinterprets them against a different
+            // default on load (skilled could flip, desiredMinQuality silently reset).
+            Scribe_Values.Look<bool>(ref this.skilled, "Quality", false, false);
+            Scribe_Values.Look<QualityCategory>(ref this.desiredMinQualityRef, "desiredMinQuality", QualityCategory.Awful, false);
             Scribe_Values.Look<bool>(ref this.desiredMinQualityReached, "desiredMinQualityReaced", true, false);
+            Scribe_Values.Look<bool>(ref this.pendingQualityRebuildInternal, "pendingQualityRebuild", false, false);
+            Scribe_Values.Look<int>(ref this.qualityRebuildAttemptsInternal, "qualityRebuildAttempts", 0, false);
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
 		{
-            if (parent.def.IsBlueprint || parent.def.IsFrame)
+            // Finished buildings that are still tracked as skilled get the toggle too, so a
+            // player can opt a building out of the deconstruct->rebuild quality redo.
+            if (parent.def.IsBlueprint || parent.def.IsFrame || skilled)
                 yield return this.GetCommandButton();
 			yield break;
 		}
