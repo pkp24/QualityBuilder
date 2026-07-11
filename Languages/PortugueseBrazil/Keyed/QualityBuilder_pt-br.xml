@@ -17,7 +17,11 @@
 	<QualityBuilder.Global>Configuração Padrão</QualityBuilder.Global>
 	<QualityBuilder.EnableByDefault>Sempre Ativar QualityBuilder por padrão</QualityBuilder.EnableByDefault>
 	<QualityBuilder.IgnoreAtSkill>Ignorar QualityBuilder quando atingir o nível {0} de habilidade</QualityBuilder.IgnoreAtSkill>
+	<QualityBuilder.MinSkill>Construções de qualidade exigem habilidade de construção {0} (melhor construtor: {1})</QualityBuilder.MinSkill>
+	<QualityBuilder.MinSkillDiff>Permitir construtores até {0} níveis de habilidade abaixo do melhor construtor</QualityBuilder.MinSkillDiff>
 	<QualityBuilder.MinQuality>Qualidade minima padrão</QualityBuilder.MinQuality>
 	<QualityBuilder.OverrideBestBuilder>Substituir o melhor construtor por</QualityBuilder.OverrideBestBuilder>
+	<QualityBuilder.UseMapSettings>Usar estas configurações do mapa (desativado = usar configurações padrão)</QualityBuilder.UseMapSettings>
+	<QualityBuilder.RebuildGaveUp>QualityBuilder desistiu de {0} após {1} tentativas de reconstrução (última qualidade: {2}). A construção foi mantida.</QualityBuilder.RebuildGaveUp>
 
 </LanguageData>
