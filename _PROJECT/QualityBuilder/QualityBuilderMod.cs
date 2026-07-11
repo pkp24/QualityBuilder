@@ -19,7 +19,12 @@ namespace QualityBuilder
         private QualityBuilderGlobalModSettings settings;
 
         private QualityBuilderModSettings currentSelectedSetting;
-        bool isCurentMapSelected = true;
+        // Opens on the default (global) settings page; the player can click the "Selected
+        // settings" box to switch to the current map's own settings instead.
+        bool isCurentMapSelected = false;
+
+        // Slider position (not a stored value) that represents "unlimited" rebuild attempts.
+        private const int UnlimitedRebuildAttemptsSliderPos = 21;
 
         public QualityBuilderMod(ModContentPack content) : base(content)
         {
@@ -67,7 +72,10 @@ namespace QualityBuilder
 
         public override string SettingsCategory()
         {
-            return "QualityBuilder Unofficial 1.6".Translate();
+            // Not a translation key: it's the mod's own display name/version, sourced from
+            // About.xml. Calling .Translate() on it looked up a nonexistent key, which in Dev
+            // Mode renders as pseudo-translated gibberish (Verse.Translator.PseudoTranslated).
+            return Content.Name;
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
@@ -88,6 +96,9 @@ namespace QualityBuilder
 
             if (firstRowList.ButtonTextLabeled("QualityBuilder.SelectedSettings".Translate(), isCurentMapSelected ? "QualityBuilder.CurrentMap".Translate() : "QualityBuilder.Global".Translate()))
                 buildSelectedSettingsFloatMenu();
+            GUI.color = new Color(1f, 1f, 1f, 0.6f);
+            firstRowList.Label("QualityBuilder.SelectedSettingsHint".Translate());
+            GUI.color = Color.white;
             firstRowList.Gap(12f);
             // Whether this map uses its own settings; when off, the global "Default settings"
             // page drives QualityBuilder on this map (see QualityBuilderModSettings.getSettings).
@@ -137,6 +148,20 @@ namespace QualityBuilder
                 if (firstRowList.ButtonTextLabeled("QualityBuilder.OverrideBestBuilder".Translate(), getBestConstructorOverrideName()))
                     buildOverrideBestConstructorFloatMenu();
             }
+            // How many deconstruct->rebuild cycles QB may spend chasing the min quality before
+            // giving up on a building. Slider maxes out at "unlimited" (never give up).
+            int curMaxRebuildAttempts = currentSelectedSetting.maxQualityRebuildAttempts;
+            int rebuildSliderPos = curMaxRebuildAttempts == QualityBuilderModSettings.UnlimitedRebuildAttempts
+                ? UnlimitedRebuildAttemptsSliderPos
+                : Mathf.Clamp(curMaxRebuildAttempts, 1, UnlimitedRebuildAttemptsSliderPos - 1);
+            string rebuildAttemptsLabel = curMaxRebuildAttempts == QualityBuilderModSettings.UnlimitedRebuildAttempts
+                ? "∞"
+                : curMaxRebuildAttempts.ToString();
+            firstRowList.Label("QualityBuilder.MaxRebuildAttempts".Translate(rebuildAttemptsLabel));
+            int newRebuildSliderPos = Mathf.RoundToInt(firstRowList.Slider((float)rebuildSliderPos, 1f, (float)UnlimitedRebuildAttemptsSliderPos));
+            currentSelectedSetting.maxQualityRebuildAttempts = newRebuildSliderPos >= UnlimitedRebuildAttemptsSliderPos
+                ? QualityBuilderModSettings.UnlimitedRebuildAttempts
+                : newRebuildSliderPos;
 
             firstRowList.End();
             /*

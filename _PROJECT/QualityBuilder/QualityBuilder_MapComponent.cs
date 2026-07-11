@@ -9,7 +9,10 @@ namespace QualityBuilder
     class QualityBuilder_MapComponent : Verse.MapComponent
     {
         public QualityBuilderModSettings settings { get; set; }
-        bool useMapSettingsInternal = true;
+        // Fresh maps follow the live "Default settings" page until the player explicitly opts
+        // this specific map into its own independent copy. (The ExposeData default below stays
+        // true so existing saves keep their historical per-map behavior on load.)
+        bool useMapSettingsInternal = false;
 
         public bool useMapSettings
         {

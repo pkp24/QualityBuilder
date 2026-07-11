@@ -16,6 +16,14 @@ namespace QualityBuilder
         Pawn bestConstructorOverrideInternal;
         int bestConstructionSkillInternal = 0;
         Stopwatch bestConstructorCheckWatch;
+        int maxQualityRebuildAttemptsInternal = DefaultMaxQualityRebuildAttempts;
+
+        // How many QB-initiated deconstruct->rebuild cycles are allowed before giving up on a
+        // building whose min quality the colony can't roll (each cycle burns ~50% materials).
+        public const int DefaultMaxQualityRebuildAttempts = 3;
+        // Sentinel stored/returned when the player drags the rebuild-attempts slider to its max
+        // (displayed as "∞"): never give up retrying for the desired quality.
+        public const int UnlimitedRebuildAttempts = int.MaxValue;
 
         public QualityBuilderModSettings()
         { }
@@ -29,6 +37,7 @@ namespace QualityBuilder
             this.ignoreQualityBuilderAtSkill = clone.ignoreQualityBuilderAtSkill;
             this.defaultUseQualityBuilder = clone.defaultUseQualityBuilder;
             this.defaultMinQualitySetting = clone.defaultMinQualitySetting;
+            this.maxQualityRebuildAttempts = clone.maxQualityRebuildAttempts;
         }
 
         public Pawn bestConstructorOverride
@@ -61,6 +70,12 @@ namespace QualityBuilder
             set { defaultMinQualitySettingInternal = value; }
         }
 
+        public int maxQualityRebuildAttempts
+        {
+            get { return maxQualityRebuildAttemptsInternal; }
+            set { maxQualityRebuildAttemptsInternal = value; }
+        }
+
         public void ExposeData()
         {
             Scribe_Values.Look<bool>(ref this.defaultUseQualityBuilderInternal, "defaultUseQBuilder", true);
@@ -68,6 +83,7 @@ namespace QualityBuilder
             Scribe_Values.Look<int>(ref this.ignoreQualityBuilderAtSkillInternal, "qBuilderIgnoAtSkill", 20);
             Scribe_Values.Look<QualityCategory>(ref this.defaultMinQualitySettingInternal, "desiredMinQuality", QualityCategory.Awful, false);
             Scribe_References.Look<Pawn>(ref this.bestConstructorOverrideInternal, "bestConstructorOverride");
+            Scribe_Values.Look<int>(ref this.maxQualityRebuildAttemptsInternal, "qBuilderMaxRebuildAttempts", DefaultMaxQualityRebuildAttempts);
         }
 
         public void resetToDefault()
@@ -78,6 +94,7 @@ namespace QualityBuilder
             this.defaultMinQualitySettingInternal = QualityCategory.Awful;
             this.bestConstructorOverride = null;
             this.bestConstructionSkillInternal = 0;
+            this.maxQualityRebuildAttemptsInternal = DefaultMaxQualityRebuildAttempts;
         }
 
         internal static QualityBuilderModSettings getSettings(Map map)
@@ -141,6 +158,11 @@ namespace QualityBuilder
         public static Pawn getBestConstructorOverride(Map map)
         {
             return getSettings(map).bestConstructorOverrideInternal;
+        }
+
+        public static int getMaxQualityRebuildAttempts(Map map)
+        {
+            return getSettings(map).maxQualityRebuildAttemptsInternal;
         }
 
         private static QualityBuilderModSettings fallBack = new QualityBuilderModSettings();

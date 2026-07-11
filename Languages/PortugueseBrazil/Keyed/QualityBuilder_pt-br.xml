@@ -13,6 +13,7 @@
 	<QualityBuilder.Nothing></QualityBuilder.Nothing>
 
 	<QualityBuilder.SelectedSettings>Configuração Selecionada</QualityBuilder.SelectedSettings>
+	<QualityBuilder.SelectedSettingsHint>Clique para alternar entre estas configurações padrão e as configurações específicas do mapa atual</QualityBuilder.SelectedSettingsHint>
 	<QualityBuilder.CurrentMap>Mapa Atual</QualityBuilder.CurrentMap>
 	<QualityBuilder.Global>Configuração Padrão</QualityBuilder.Global>
 	<QualityBuilder.EnableByDefault>Sempre Ativar QualityBuilder por padrão</QualityBuilder.EnableByDefault>
@@ -22,6 +23,7 @@
 	<QualityBuilder.MinQuality>Qualidade minima padrão</QualityBuilder.MinQuality>
 	<QualityBuilder.OverrideBestBuilder>Substituir o melhor construtor por</QualityBuilder.OverrideBestBuilder>
 	<QualityBuilder.UseMapSettings>Usar estas configurações do mapa (desativado = usar configurações padrão)</QualityBuilder.UseMapSettings>
-	<QualityBuilder.RebuildGaveUp>QualityBuilder desistiu de {0} após {1} tentativas de reconstrução (última qualidade: {2}). A construção foi mantida.</QualityBuilder.RebuildGaveUp>
+	<QualityBuilder.MaxRebuildAttempts>Desistir após {0} tentativas de reconstrução falhadas (∞ = nunca desistir)</QualityBuilder.MaxRebuildAttempts>
+	<QualityBuilder.RebuildGaveUp>QualityBuilder desistiu de {0} após {1} tentativas de reconstrução (última qualidade: {2}). A construção foi mantida. Você pode alterar esse limite nas configurações do mod.</QualityBuilder.RebuildGaveUp>
 
 </LanguageData>

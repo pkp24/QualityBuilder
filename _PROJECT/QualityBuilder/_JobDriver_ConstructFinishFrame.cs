@@ -38,10 +38,6 @@ namespace QualityBuilder
 			return list;
 		}
 
-		// How many QB-initiated deconstruct->rebuild cycles are allowed before giving up on a
-		// building whose min quality the colony can't roll (each cycle burns ~50% materials).
-		private const int MaxQualityRebuildAttempts = 3;
-
 		public static void afterFinishToil(CompQualityBuilder cmp, Map curMap, LocalTargetInfo targetInfo)
 		{
 			if (cmp == null || curMap == null)
@@ -117,12 +113,13 @@ namespace QualityBuilder
 			}
 
 			// Loop-breaker: an unreachable min quality must not deconstruct->rebuild forever
-			// (each cycle burns ~50% materials). After the cap, keep the building and tell the
-			// player once.
-			if (buildingCmp.qualityRebuildAttempts >= MaxQualityRebuildAttempts)
+			// (each cycle burns ~50% materials), unless the player explicitly asked for
+			// unlimited attempts. After the cap, keep the building and tell the player once.
+			int maxRebuildAttempts = QualityBuilderModSettings.getMaxQualityRebuildAttempts(curMap);
+			if (buildingCmp.qualityRebuildAttempts >= maxRebuildAttempts)
 			{
 				buildingCmp.pendingQualityRebuild = false;
-				Messages.Message("QualityBuilder.RebuildGaveUp".Translate(building.LabelShort, MaxQualityRebuildAttempts, finishedBuildingQuality.GetLabel()), building, MessageTypeDefOf.NegativeEvent);
+				Messages.Message("QualityBuilder.RebuildGaveUp".Translate(building.LabelShort, maxRebuildAttempts, finishedBuildingQuality.GetLabel()), building, MessageTypeDefOf.NegativeEvent);
 				return;
 			}
 			buildingCmp.qualityRebuildAttempts++;

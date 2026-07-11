@@ -13,6 +13,7 @@
 	<QualityBuilder.Nothing></QualityBuilder.Nothing>
 
 	<QualityBuilder.SelectedSettings>Selected settings</QualityBuilder.SelectedSettings>
+	<QualityBuilder.SelectedSettingsHint>Click to switch between these default settings and settings specific to the current map</QualityBuilder.SelectedSettingsHint>
 	<QualityBuilder.CurrentMap>Current map</QualityBuilder.CurrentMap>
 	<QualityBuilder.Global>Default settings</QualityBuilder.Global>
 	<QualityBuilder.EnableByDefault>Enable QualityBuilder by default</QualityBuilder.EnableByDefault>
@@ -22,5 +23,6 @@
 	<QualityBuilder.MinQuality>Default minimum quality</QualityBuilder.MinQuality>
 	<QualityBuilder.OverrideBestBuilder>Override best builder with</QualityBuilder.OverrideBestBuilder>
 	<QualityBuilder.UseMapSettings>Use these map settings (off = use default settings)</QualityBuilder.UseMapSettings>
-	<QualityBuilder.RebuildGaveUp>QualityBuilder gave up on {0} after {1} rebuild attempts (last quality: {2}). The building was kept.</QualityBuilder.RebuildGaveUp>
+	<QualityBuilder.MaxRebuildAttempts>Give up after {0} failed rebuild attempts (∞ = never give up)</QualityBuilder.MaxRebuildAttempts>
+	<QualityBuilder.RebuildGaveUp>QualityBuilder gave up on {0} after {1} rebuild attempts (last quality: {2}). The building was kept. You can change this limit in the mod settings.</QualityBuilder.RebuildGaveUp>
 </LanguageData>
