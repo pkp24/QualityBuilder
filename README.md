@@ -1,4 +1,4 @@
-# QualityBuilder
+# QualityBuilder Unofficial 1.6
 
 Originally created by Hatti: https://steamcommunity.com/sharedfiles/filedetails/?id=754637870
 Currently maintained by pkp24 since the original hasn't been updated in a while. Package id is unchanged so this just keeps working as the same mod in your list, no resub needed.

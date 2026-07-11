@@ -67,7 +67,7 @@ namespace QualityBuilder
 
         public override string SettingsCategory()
         {
-            return "QualityBuilder".Translate();
+            return "QualityBuilder Unofficial 1.6".Translate();
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
