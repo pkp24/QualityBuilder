@@ -93,45 +93,15 @@ namespace QualityBuilder
 					QualityBuilder.applyStyle(newBP, originalBuilding.StyleSourcePrecept, originalBuilding.StyleDef);
 				return;
 			}
-			QualityCategory finishedBuildingQuality;
-			if (!building.TryGetQuality(out finishedBuildingQuality))
-			{
-				return;
-			}
 			CompQualityBuilder buildingCmp = QualityBuilder.getCompQualityBuilder(building);
 			buildingCmp.isSkilled = cmp.isSkilled;
 			buildingCmp.desiredMinQuality = cmp.desiredMinQuality;
 			// Carry the redo counter across the frame->building comp handoff.
 			buildingCmp.qualityRebuildAttempts = cmp.qualityRebuildAttempts;
-			if (finishedBuildingQuality >= cmp.desiredMinQuality || !cmp.isSkilled)
-			{
-				buildingCmp.isDesiredMinQualityReached = true;
-				// A successful build meeting the min quality resets the redo counter.
-				buildingCmp.qualityRebuildAttempts = 0;
-				buildingCmp.pendingQualityRebuild = false;
-				return;
-			}
-
-			// Loop-breaker: an unreachable min quality must not deconstruct->rebuild forever
-			// (each cycle burns ~50% materials), unless the player explicitly asked for
-			// unlimited attempts. After the cap, keep the building and tell the player once.
-			int maxRebuildAttempts = QualityBuilderModSettings.getMaxQualityRebuildAttempts(curMap);
-			if (buildingCmp.qualityRebuildAttempts >= maxRebuildAttempts)
-			{
-				buildingCmp.pendingQualityRebuild = false;
-				Messages.Message("QualityBuilder.RebuildGaveUp".Translate(building.LabelShort, maxRebuildAttempts, finishedBuildingQuality.GetLabel()), building, MessageTypeDefOf.NegativeEvent);
-				return;
-			}
-			buildingCmp.qualityRebuildAttempts++;
-
-			// Quality too low: designate for deconstruction. pendingQualityRebuild marks this
-			// deconstruction as QB-initiated so _JobDriver_Deconstruct_FinishedRemoving rebuilds
-			// it — player-ordered deconstructions never set the flag and are never hijacked.
 			// The rebuild, ideology-style restoration, and the single reservation release for
-			// the deconstruct->rebuild handoff all happen there once the building is actually
-			// removed (releasing here would be premature — nothing is rebuilt yet).
-			buildingCmp.pendingQualityRebuild = true;
-			curMap.designationManager.AddDesignation(new Designation(building, DesignationDefOf.Deconstruct));
+			// the deconstruct->rebuild handoff all happen in _JobDriver_Deconstruct_FinishedRemoving
+			// once the building is actually removed (releasing here would be premature).
+			QualityBuilder.checkAndDesignateForRebuild(building, buildingCmp);
 		}
 	}
 }

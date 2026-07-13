@@ -103,10 +103,20 @@ namespace QualityBuilder
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
 		{
-            // Finished buildings that are still tracked as skilled get the toggle too, so a
-            // player can opt a building out of the deconstruct->rebuild quality redo.
-            if (parent.def.IsBlueprint || parent.def.IsFrame || skilled)
+            if (parent.def.IsBlueprint || parent.def.IsFrame)
+            {
                 yield return this.GetCommandButton();
+            }
+            else if (parent is Building building && !(building is Frame))
+            {
+                // Finished buildings: keep offering the toggle as long as there's quality
+                // headroom left to build up to. Gating this on `skilled` instead would strand
+                // the player once they toggle off, since the only way back on is this same
+                // gizmo's right-click menu.
+                QualityCategory curQuality;
+                if (!building.TryGetQuality(out curQuality) || curQuality < QualityCategory.Legendary)
+                    yield return this.GetCommandButton();
+            }
 			yield break;
 		}
 
@@ -114,7 +124,7 @@ namespace QualityBuilder
 		{
             ToggleCommand command_Toggle = new ToggleCommand();
             command_Toggle.hotKey = KeyBindingDefOf.Misc1;
-			command_Toggle.icon = QualityBuilderStartup.SkilledTex;
+			command_Toggle.icon = skilled ? QualityBuilderStartup.SkilledTex : QualityBuilderStartup.UnSkilledTex;
 			command_Toggle.isActive = new Func<bool>(this.IsSkilledActive);
 			command_Toggle.toggleAction = new Action(this.ToggleSkilled);
             command_Toggle.defaultLabel = Translator.Translate("QualityBuilderCommand.Label");
@@ -149,15 +159,30 @@ namespace QualityBuilder
             {
                 get
                 {
+                    List<object> selected = Find.Selector.SelectedObjects.FindAll(o => typeof(ThingWithComps).IsAssignableFrom(o.GetType()));
+                    // Never offer a quality at or below what a selected finished building
+                    // already has — retargeting to its current (or a lower) quality isn't a
+                    // meaningful choice. Blueprints/frames have no current quality yet, so
+                    // they keep the full Awful..Legendary range.
+                    QualityCategory minQuality = QualityCategory.Awful;
+                    bool hasFinishedBuilding = false;
+                    foreach (object curSelection in selected)
+                    {
+                        if (curSelection is Building building && !(building is Frame) && building.TryGetQuality(out QualityCategory curQuality))
+                        {
+                            hasFinishedBuilding = true;
+                            if (curQuality > minQuality)
+                                minQuality = curQuality;
+                        }
+                    }
                     return QualityBuilder.getFloatingOptions(item => {
-                            List<object> selected = Find.Selector.SelectedObjects.FindAll(o => typeof(ThingWithComps).IsAssignableFrom(o.GetType()));
                             foreach (object curSelection in selected)
                             {
                                 CompQualityBuilder cmp = QualityBuilder.getCompQualityBuilder(curSelection as ThingWithComps);
                                 if (cmp != null)
                                     QualityBuilder.setSkilled(curSelection as ThingWithComps, item, true);
                             }
-                    });
+                    }, minQuality, hasFinishedBuilding);
                 }
             }
         }

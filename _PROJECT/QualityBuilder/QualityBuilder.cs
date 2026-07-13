@@ -110,6 +110,60 @@ namespace QualityBuilder
 			{
 				forbiddable.Forbidden = wasForbidden;
 			}
+			// Setting a quality target on an already-finished building (as opposed to a
+			// blueprint/frame still under construction) needs its own check: the normal
+			// deconstruct->rebuild designation only happens right after a frame completes
+			// (_JobDriver_ConstructFinishFrame), so without this, right-clicking a quality
+			// onto a finished building would silently do nothing.
+			if (add && thing is Building building && !(building is Frame))
+				checkAndDesignateForRebuild(building, getCompQualityBuilder(building));
+		}
+
+		// Compares a finished building's current quality against its desired minimum and, if
+		// it falls short, designates it for deconstruction so the deconstruct->rebuild cycle
+		// (_JobDriver_Deconstruct) replaces it with a higher-quality version. Shared by the
+		// post-construction check and by setting a quality target on an already-finished
+		// building (setSkilled, e.g. via the gizmo's right-click menu).
+		public static void checkAndDesignateForRebuild(Building building, CompQualityBuilder buildingCmp)
+		{
+			if (building == null || buildingCmp == null)
+				return;
+			Map curMap = building.Map;
+			if (curMap == null)
+				return;
+			QualityCategory finishedBuildingQuality;
+			if (!building.TryGetQuality(out finishedBuildingQuality))
+				return;
+			if (finishedBuildingQuality >= buildingCmp.desiredMinQuality || !buildingCmp.isSkilled)
+			{
+				buildingCmp.isDesiredMinQualityReached = true;
+				// Meeting (or no longer targeting) the min quality resets the redo counter.
+				buildingCmp.qualityRebuildAttempts = 0;
+				buildingCmp.pendingQualityRebuild = false;
+				return;
+			}
+			// Already mid-cycle (or a Deconstruct designation is already pending) — don't
+			// re-designate or double-count attempts.
+			if (buildingCmp.pendingQualityRebuild || curMap.designationManager.DesignationOn(building, DesignationDefOf.Deconstruct) != null)
+				return;
+
+			// Loop-breaker: an unreachable min quality must not deconstruct->rebuild forever
+			// (each cycle burns ~50% materials), unless the player explicitly asked for
+			// unlimited attempts. After the cap, keep the building and tell the player once.
+			int maxRebuildAttempts = QualityBuilderModSettings.getMaxQualityRebuildAttempts(curMap);
+			if (buildingCmp.qualityRebuildAttempts >= maxRebuildAttempts)
+			{
+				buildingCmp.pendingQualityRebuild = false;
+				Messages.Message("QualityBuilder.RebuildGaveUp".Translate(building.LabelShort, maxRebuildAttempts, finishedBuildingQuality.GetLabel()), building, MessageTypeDefOf.NegativeEvent);
+				return;
+			}
+			buildingCmp.qualityRebuildAttempts++;
+
+			// Quality too low: designate for deconstruction. pendingQualityRebuild marks this
+			// deconstruction as QB-initiated so _JobDriver_Deconstruct_FinishedRemoving rebuilds
+			// it — player-ordered deconstructions never set the flag and are never hijacked.
+			buildingCmp.pendingQualityRebuild = true;
+			curMap.designationManager.AddDesignation(new Designation(building, DesignationDefOf.Deconstruct));
 		}
 
 		private static void setSkilledInComp(Thing thing, QualityCategory curCat, bool add)
@@ -188,11 +242,19 @@ namespace QualityBuilder
 
 		public delegate void SetQuality(QualityCategory cat);
 
-		public static IEnumerable<FloatMenuOption> getFloatingOptions(SetQuality action)
+		// exclusive=true excludes minQuality itself (used when minQuality is a finished
+		// building's *current* quality — retargeting to the same quality it already has is
+		// not a meaningful choice). exclusive=false (default) keeps minQuality as the floor,
+		// for callers (e.g. blueprints/frames) with no current quality to exceed.
+		public static IEnumerable<FloatMenuOption> getFloatingOptions(SetQuality action, QualityCategory minQuality = QualityCategory.Awful, bool exclusive = false)
 		{
 			List<FloatMenuOption> floatOptionList = new List<FloatMenuOption>();
 			foreach (QualityCategory item in Enum.GetValues(typeof(QualityCategory)))
+			{
+				if (exclusive ? item <= minQuality : item < minQuality)
+					continue;
 				floatOptionList.Add(buildFloatMenuOption(action, item));
+			}
 			return floatOptionList;
 		}
 
