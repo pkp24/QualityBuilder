@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+	
+	<QualityBuilder>Качественное строительство</QualityBuilder>
+	<QualityBuilderCommand.Label>Качество</QualityBuilderCommand.Label>
+
+	<QualityBuilderOn.Label>С учётом качества</QualityBuilderOn.Label>
+	<QualityBuilderOn.Desc>Текущее качество: {0}. Назначить строительство только лучшему строителю.</QualityBuilderOn.Desc>
+	<QualityBuilder.Already></QualityBuilder.Already>
+
+	<QualityBuilderOff.Label>Без учёта качества</QualityBuilderOff.Label>
+	<QualityBuilderOff.Desc>Текущее качество: {0}. Снять ограничение на лучшего строителя.</QualityBuilderOff.Desc>
+	<QualityBuilder.Nothing></QualityBuilder.Nothing>
+
+	<QualityBuilder.SelectedSettings>Выбранные настройки</QualityBuilder.SelectedSettings>
+	<QualityBuilder.SelectedSettingsHint>Нажмите, чтобы переключить между глобальными настройками и настройками этой карты</QualityBuilder.SelectedSettingsHint>
+	<QualityBuilder.CurrentMap>Настройки карты</QualityBuilder.CurrentMap>
+	<QualityBuilder.Global>Глобальные настройки</QualityBuilder.Global>
+	<QualityBuilder.EnableByDefault>Включать качественное строительство по умолчанию</QualityBuilder.EnableByDefault>
+	<QualityBuilder.IgnoreAtSkill>Игнорировать качественное строительство при навыке {0}</QualityBuilder.IgnoreAtSkill>
+	<QualityBuilder.MinSkill>Для качественного строительства требуется навык строительства {0} (лучший строитель: {1})</QualityBuilder.MinSkill>
+	<QualityBuilder.MinSkillDiff>Разрешать строителей с навыком не более чем на {0} ниже лучшего</QualityBuilder.MinSkillDiff>
+	<QualityBuilder.MinQuality>Минимальное качество по умолчанию</QualityBuilder.MinQuality>
+	<QualityBuilder.OverrideBestBuilder>Переопределить лучшего строителя на</QualityBuilder.OverrideBestBuilder>
+	<QualityBuilder.UseMapSettings>Использовать настройки этой карты (выкл = глобальные)</QualityBuilder.UseMapSettings>
+	<QualityBuilder.MaxRebuildAttempts>Отказаться после {0} неудачных попыток перестройки (∞ = никогда не отказываться)</QualityBuilder.MaxRebuildAttempts>
+	<QualityBuilder.RebuildGaveUp>Строитель отказался от {0} после {1} попыток перестройки (последнее качество: {2}). Постройка оставлена. Лимит можно изменить в настройках мода.</QualityBuilder.RebuildGaveUp>
+
+</LanguageData>
