@@ -175,6 +175,11 @@ namespace QualityBuilder
                     {
                         if (curSelection is Building building && !(building is Frame) && building.TryGetQuality(out QualityCategory curQuality))
                         {
+                            // "Show quality gizmo only on blueprints/frames": a finished building the
+                            // toggle hides must not constrain the menu offered to co-selected
+                            // blueprints/frames either (the action loop below already skips it).
+                            if (QualityBuilderModSettings.getGizmoOnBlueprintsOnly(building.Map))
+                                continue;
                             hasFinishedBuilding = true;
                             if (curQuality > minQuality)
                                 minQuality = curQuality;

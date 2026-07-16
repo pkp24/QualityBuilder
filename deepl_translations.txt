@@ -1,0 +1,376 @@
+Ukranian
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Увімкнути Quality Builder
+<QualityBuilderOn.Desc>Поточна якість: {0}. Встановити будівлі для кваліфікованих робітників
+<QualityBuilderOff.Label>Вимкнути Quality Builder
+<QualityBuilderOff.Desc>Поточна якість: {0}. Вимкнути будівлі для кваліфікованих робітників
+<QualityBuilder.SelectedSettings>Вибрані налаштування
+<QualityBuilder.CurrentMap>Поточна карта
+<QualityBuilder.Global>Налаштування за замовчуванням
+<QualityBuilder.EnableByDefault>Увімкнути QualityBuilder за замовчуванням
+<QualityBuilder.IgnoreAtSkill>Ігнорувати QualityBuilder при рівні майстерності {0}
+<QualityBuilder.MinSkill>Будівництво високої якості вимагає рівня майстерності {0} (найкращий будівельник: {1})
+<QualityBuilder.MinSkillDiff>Дозволити будівельників, рівень майстерності яких не нижчий ніж на {0} рівнів нижче за найкращого будівельника
+<QualityBuilder.MinQuality>Мінімальна якість за замовчуванням
+<QualityBuilder.OverrideBestBuilder>Замінити найкращого будівельника на
+<QualityBuilder.UseMapSettings>Використовувати ці налаштування карти (вимкнено = використовувати налаштування за замовчуванням)
+<QualityBuilder.RebuildGaveUp>QualityBuilder відмовився від {0} після {1} спроб перебудови (остання якість: {2}). Будівля була збережена
+
+Japanese
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Quality Builder を有効にする
+<QualityBuilderOn.Desc>現在の品質：{0}。熟練労働者向けの建物を設定します
+<QualityBuilderOff.Label>Quality Builder を無効にする
+<QualityBuilderOff.Desc>現在の品質：{0}。熟練労働者向けの建物の設定を解除します
+<QualityBuilder.SelectedSettings>選択された設定
+<QualityBuilder.CurrentMap>現在のマップ
+<QualityBuilder.Global>デフォルト設定
+<QualityBuilder.EnableByDefault>QualityBuilderをデフォルトで有効にする
+<QualityBuilder.IgnoreAtSkill>スキル {0} では QualityBuilder を無視する
+<QualityBuilder.MinSkill>高品質な建設には建設スキル {0} が必要です（最高の建設者：{1}）
+<QualityBuilder.MinSkillDiff>最高のビルダーより最大{0}スキルレベル低いビルダーを許可
+<QualityBuilder.MinQuality>デフォルトの最低品質
+<QualityBuilder.OverrideBestBuilder>最高のビルダーを以下で上書き
+<QualityBuilder.UseMapSettings>これらのマップ設定を使用（オフ = デフォルト設定を使用）
+<QualityBuilder.RebuildGaveUp>QualityBuilderは、{1}回の再構築試行の後、{0}の構築を断念しました（最後の品質：{2}）。建物は維持されました
+
+Swedish
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Aktivera Quality Builder
+<QualityBuilderOn.Desc>Aktuell kvalitet: {0}. Aktivera byggnader för skickliga arbetare
+<QualityBuilderOff.Label>Inaktivera Quality Builder
+<QualityBuilderOff.Desc>Aktuell kvalitet: {0}. Inaktivera byggnader för skickliga arbetare
+<QualityBuilder.SelectedSettings>Valda inställningar
+<QualityBuilder.CurrentMap>Aktuell karta
+<QualityBuilder.Global>Standardinställningar
+<QualityBuilder.EnableByDefault>Aktivera QualityBuilder som standard
+<QualityBuilder.IgnoreAtSkill>Ignorera QualityBuilder vid skicklighetsnivå {0}
+<QualityBuilder.MinSkill>Kvalitetsbyggnader kräver byggskicklighet {0} (bästa byggare: {1})
+<QualityBuilder.MinSkillDiff>Tillåt byggare upp till {0} färdighetsnivåer under den bästa byggaren
+<QualityBuilder.MinQuality>Standardminimikvalitet
+<QualityBuilder.OverrideBestBuilder>Åsidosätt den bästa byggaren med
+<QualityBuilder.UseMapSettings>Använd dessa kartinställningar (av = använd standardinställningar)
+<QualityBuilder.RebuildGaveUp>QualityBuilder gav upp {0} efter {1} återuppbyggnadsförsök (senaste kvalitet: {2}). Byggnaden behölls
+
+korean
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Quality Builder 설정
+<QualityBuilderOn.Desc>현재 품질: {0}. 숙련된 작업자를 위한 건물 설정
+<QualityBuilderOff.Label>Quality Builder 해제
+<QualityBuilderOff.Desc>현재 품질: {0}. 숙련된 작업자를 위한 건물 설정 해제
+<QualityBuilder.SelectedSettings>선택된 설정
+<QualityBuilder.CurrentMap>현재 지도
+<QualityBuilder.Global>기본 설정
+<QualityBuilder.EnableByDefault>QualityBuilder를 기본적으로 활성화
+<QualityBuilder.IgnoreAtSkill>기술 레벨 {0}에서는 QualityBuilder 무시
+<QualityBuilder.MinSkill>고품질 건축에는 건설 기술 레벨 {0}이 필요합니다 (최고의 건축가: {1})
+<QualityBuilder.MinSkillDiff>최고의 건축가보다 최대 {0} 레벨 낮은 건축가 허용
+<QualityBuilder.MinQuality>기본 최소 품질
+<QualityBuilder.OverrideBestBuilder>최고의 건축가를 다음으로 대체
+<QualityBuilder.UseMapSettings>이 맵 설정 사용 (off = 기본 설정 사용)
+<QualityBuilder.RebuildGaveUp>QualityBuilder가 {1}번의 재건축 시도 후 {0}을 포기했습니다 (마지막 품질: {2}). 건물은 유지되었습니다
+
+Hindi
+<QualityBuilder>क्वालिटी बिल्डर
+<QualityBuilderCommand.Label>क्वालिटी बिल्डर
+<QualityBuilderOn.Label>क्वालिटी बिल्डर सेट करें
+<QualityBuilderOn.Desc>वर्तमान गुणवत्ता: {0}। कुशल श्रमिकों के लिए इमारतें सेट करें
+<QualityBuilderOff.Label>क्वालिटी बिल्डर अनसेट करें
+<QualityBuilderOff.Desc>वर्तमान गुणवत्ता: {0}। कुशल श्रमिकों के लिए इमारतें अनसेट करें
+<QualityBuilder.SelectedSettings>चुनी गई सेटिंग्स
+<QualityBuilder.CurrentMap>वर्तमान मानचित्र
+<QualityBuilder.Global>डिफ़ॉल्ट सेटिंग्स
+<QualityBuilder.EnableByDefault>डिफ़ॉल्ट रूप से क्वालिटी बिल्डर सक्षम करें
+<QualityBuilder.IgnoreAtSkill>कौशल {0} पर क्वालिटी बिल्डर को अनदेखा करें
+<QualityBuilder.MinSkill>गुणवत्ता निर्माण के लिए निर्माण कौशल {0} की आवश्यकता है (सर्वश्रेष्ठ बिल्डर: {1})
+<QualityBuilder.MinSkillDiff>सर्वश्रेष्ठ बिल्डर से {0} कौशल स्तर नीचे तक के बिल्डरों की अनुमति दें
+<QualityBuilder.MinQuality>डिफ़ॉल्ट न्यूनतम गुणवत्ता
+<QualityBuilder.OverrideBestBuilder>सर्वश्रेष्ठ बिल्डर को इसके साथ ओवरराइड करें
+<QualityBuilder.UseMapSettings>इन मानचित्र सेटिंग्स का उपयोग करें (ऑफ़ = डिफ़ॉल्ट सेटिंग्स का उपयोग करें)
+<QualityBuilder.RebuildGaveUp>QualityBuilder ने {1} पुनर्निर्माण प्रयासों के बाद {0} पर हार मान ली (अंतिम गुणवत्ता: {2})। इमारत बनी रही
+
+Punjabi
+<QualityBuilder>ਗੁਣਵੱਤਾ ਨਿਰਮਾਤਾ
+<QualityBuilderCommand.Label>ਗੁਣਵੱਤਾ ਨਿਰਮਾਤਾ
+<QualityBuilderOn.Label>ਗੁਣਵੱਤਾ ਨਿਰਮਾਤਾ ਸੈੱਟ ਕਰੋ
+<QualityBuilderOn.Desc>ਮੌਜੂਦਾ ਗੁਣਵੱਤਾ: {0}। ਹੁਨਰਮੰਦ ਕਾਮਿਆਂ ਲਈ ਇਮਾਰਤਾਂ ਸੈੱਟ ਕਰੋ
+<QualityBuilderOff.Label>ਗੁਣਵੱਤਾ ਨਿਰਮਾਤਾ ਅਣ-ਸੈੱਟ ਕਰੋ
+<QualityBuilderOff.Desc>ਮੌਜੂਦਾ ਗੁਣਵੱਤਾ: {0}। ਹੁਨਰਮੰਦ ਕਾਮਿਆਂ ਲਈ ਇਮਾਰਤਾਂ ਅਣ-ਸੈੱਟ ਕਰੋ
+<QualityBuilder.SelectedSettings>ਚੁਣੀਆਂ ਗਈਆਂ ਸੈਟਿੰਗਾਂ
+<QualityBuilder.CurrentMap>ਮੌਜੂਦਾ ਨਕਸ਼ਾ
+<QualityBuilder.Global>ਡਿਫੌਲਟ ਸੈਟਿੰਗਾਂ
+<QualityBuilder.EnableByDefault>ਡਿਫੌਲਟ ਦੁਆਰਾ QualityBuilder ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+<QualityBuilder.IgnoreAtSkill>ਕੁਸ਼ਲਤਾ {0} 'ਤੇ QualityBuilder ਨੂੰ ਨਜ਼ਰਅੰਦਾਜ਼ ਕਰੋ
+<QualityBuilder.MinSkill>ਗੁਣਵੱਤਾ ਨਿਰਮਾਣ ਲਈ ਨਿਰਮਾਣ ਕੁਸ਼ਲਤਾ {0} ਦੀ ਲੋੜ ਹੈ (ਸਭ ਤੋਂ ਵਧੀਆ ਨਿਰਮਾਤਾ: {1})
+<QualityBuilder.MinSkillDiff>ਸਭ ਤੋਂ ਵਧੀਆ ਬਿਲਡਰ ਤੋਂ {0} ਹੁਨਰ ਪੱਧਰ ਘੱਟ ਵਾਲੇ ਬਿਲਡਰਾਂ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ
+<QualityBuilder.MinQuality>ਡਿਫੌਲਟ ਘੱਟੋ-ਘੱਟ ਗੁਣਵੱਤਾ
+<QualityBuilder.OverrideBestBuilder>ਸਭ ਤੋਂ ਵਧੀਆ ਬਿਲਡਰ ਨੂੰ ਇਸ ਨਾਲ ਓਵਰਰਾਈਡ ਕਰੋ
+<QualityBuilder.UseMapSettings>ਇਹਨਾਂ ਨਕਸ਼ਾ ਸੈਟਿੰਗਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਬੰਦ = ਡਿਫੌਲਟ ਸੈਟਿੰਗਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ)
+<QualityBuilder.RebuildGaveUp>QualityBuilder ਨੇ {1} ਮੁੜ-ਨਿਰਮਾਣ ਕੋਸ਼ਿਸ਼ਾਂ ਤੋਂ ਬਾਅਦ {0} 'ਤੇ ਹਾਰ ਮੰਨ ਲਈ (ਆਖਰੀ ਗੁਣਵੱਤਾ: {2}). ਇਮਾਰਤ ਬਰਕਰਾਰ ਰੱਖੀ ਗਈ
+
+Danish
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Aktivér Quality Builder
+<QualityBuilderOn.Desc>Nuværende kvalitet: {0}. Indstil bygninger til dygtige arbejdere
+<QualityBuilderOff.Label>Deaktiver Quality Builder
+<QualityBuilderOff.Desc>Nuværende kvalitet: {0}. Deaktiver bygninger til dygtige arbejdere
+<QualityBuilder.SelectedSettings>Valgte indstillinger
+<QualityBuilder.CurrentMap>Nuværende kort
+<QualityBuilder.Global>Standardindstillinger
+<QualityBuilder.EnableByDefault>Aktivér QualityBuilder som standard
+<QualityBuilder.IgnoreAtSkill>Ignorer QualityBuilder ved færdighedsniveau {0}
+<QualityBuilder.MinSkill>Kvalitetsbyggeri kræver byggefærdighed {0} (bedste bygherre: {1})
+<QualityBuilder.MinSkillDiff>Tillad bygherrer op til {0} færdighedsniveauer under den bedste bygherre
+<QualityBuilder.MinQuality>Standard minimums kvalitet
+<QualityBuilder.OverrideBestBuilder>Tilsidesæt den bedste bygherre med
+<QualityBuilder.UseMapSettings>Brug disse kortindstillinger (slået fra = brug standardindstillinger)
+<QualityBuilder.RebuildGaveUp>QualityBuilder opgav {0} efter {1} genopbygningsforsøg (sidste kvalitet: {2}). Bygningen blev bevaret
+
+Cantonese
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>設定質量
+<QualityBuilderOn.Label>設定質量
+<QualityBuilderOn.Desc>現有質量:{0}。為熟練工人設定建築
+<QualityBuilderOff.Label>取消設定質量
+<QualityBuilderOff.Desc>現有質量:{0}。為熟練工人取消建築設定
+<QualityBuilder.SelectedSettings>所選設定
+<QualityBuilder.CurrentMap>當前地圖
+<QualityBuilder.Global>預設設定
+<QualityBuilder.EnableByDefault>預設啟用 QualityBuilder
+<QualityBuilder.IgnoreAtSkill>當技能達到 {0} 時忽略 QualityBuilder
+<QualityBuilder.MinSkill>品質建造需要 {0} 級建造技能 (最佳建造者:{1})
+<QualityBuilder.MinSkillDiff>容許建築師嘅技能等級低至最佳建築師 {0} 級
+<QualityBuilder.MinQuality>預設最低品質
+<QualityBuilder.OverrideBestBuilder>用 {0} 覆蓋最佳建築師
+<QualityBuilder.UseMapSettings>使用呢啲地圖設定 (off = 使用預設設定)
+<QualityBuilder.RebuildGaveUp>QualityBuilder 經過 {1} 次重建嘗試後放棄 {0} (最後質量: {2})。建築物已保留
+
+Finnish
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Ota Quality Builder käyttöön
+<QualityBuilderOn.Desc>Nykyinen laatu: {0}. Määritä rakennukset taitaville työntekijöille
+<QualityBuilderOff.Label>Poista Quality Builder käytöstä
+<QualityBuilderOff.Desc>Nykyinen laatu: {0}. Poista rakennukset taitaville työntekijöille
+<QualityBuilder.SelectedSettings>Valitut asetukset
+<QualityBuilder.CurrentMap>Nykyinen kartta
+<QualityBuilder.Global>Oletusasetukset
+<QualityBuilder.EnableByDefault>Ota QualityBuilder käyttöön oletuksena
+<QualityBuilder.IgnoreAtSkill>Ohita QualityBuilder taitotasolla {0}
+<QualityBuilder.MinSkill>Laadukkaat rakennukset vaativat rakentamistaitoa {0} (paras rakentaja: {1})
+<QualityBuilder.MinSkillDiff>Salli rakentajia, joiden taito on enintään {0} tasoa parasta rakentajaa alempi
+<QualityBuilder.MinQuality>Oletusarvoinen vähimmäislaatu
+<QualityBuilder.OverrideBestBuilder>Ohita paras rakentaja seuraavalla
+<QualityBuilder.UseMapSettings>Käytä näitä kartta-asetuksia (pois päältä = käytä oletusasetuksia)
+<QualityBuilder.RebuildGaveUp>QualityBuilder luopui {0}:sta {1} uudelleenrakennusyrityksen jälkeen (viimeinen laatu: {2}). Rakennus säilytettiin
+
+French
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Activer Quality Builder
+<QualityBuilderOn.Desc>Qualité actuelle : {0}. Définir les bâtiments pour les ouvriers qualifiés
+<QualityBuilderOff.Label>Désactiver Quality Builder
+<QualityBuilderOff.Desc>Qualité actuelle : {0}. Désactiver les bâtiments pour les ouvriers qualifiés
+<QualityBuilder.SelectedSettings>Paramètres sélectionnés
+<QualityBuilder.CurrentMap>Carte actuelle
+<QualityBuilder.Global>Paramètres par défaut
+<QualityBuilder.EnableByDefault>Activer QualityBuilder par défaut
+<QualityBuilder.IgnoreAtSkill>Ignorer QualityBuilder à partir du niveau de compétence {0}
+<QualityBuilder.MinSkill>Les constructions de qualité nécessitent un niveau de compétence en construction de {0} (meilleur constructeur : {1})
+<QualityBuilder.MinSkillDiff>Autoriser les constructeurs dont le niveau de compétence est inférieur de {0} niveaux à celui du meilleur constructeur
+<QualityBuilder.MinQuality>Qualité minimale par défaut
+<QualityBuilder.OverrideBestBuilder>Remplacer le meilleur constructeur par
+<QualityBuilder.UseMapSettings>Utiliser ces paramètres de carte (désactivé = utiliser les paramètres par défaut)
+<QualityBuilder.RebuildGaveUp>QualityBuilder a abandonné {0} après {1} tentatives de reconstruction (dernière qualité : {2}). Le bâtiment a été conservé
+
+Greek
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Ενεργοποίηση Quality Builder
+<QualityBuilderOn.Desc>Τρέχουσα ποιότητα: {0}. Ρύθμιση κτιρίων για εξειδικευμένους εργάτες
+<QualityBuilderOff.Label>Απενεργοποίηση Quality Builder
+<QualityBuilderOff.Desc>Τρέχουσα ποιότητα: {0}. Απενεργοποίηση κτιρίων για εξειδικευμένους εργάτες
+<QualityBuilder.SelectedSettings>Επιλεγμένες ρυθμίσεις
+<QualityBuilder.CurrentMap>Τρέχων χάρτης
+<QualityBuilder.Global>Προεπιλεγμένες ρυθμίσεις
+<QualityBuilder.EnableByDefault>Ενεργοποίηση του QualityBuilder από προεπιλογή
+<QualityBuilder.IgnoreAtSkill>Παράβλεψη του QualityBuilder στο επίπεδο δεξιοτήτων {0}
+<QualityBuilder.MinSkill>Οι κατασκευές υψηλής ποιότητας απαιτούν δεξιότητα κατασκευής {0} (καλύτερος κατασκευαστής: {1})
+<QualityBuilder.MinSkillDiff>Να επιτρέπονται κατασκευαστές έως και {0} επίπεδα δεξιοτήτων κάτω από τον καλύτερο κατασκευαστή
+<QualityBuilder.MinQuality>Προεπιλεγμένη ελάχιστη ποιότητα
+<QualityBuilder.OverrideBestBuilder>Αντικατάσταση του καλύτερου κατασκευαστή με
+<QualityBuilder.UseMapSettings>Χρήση αυτών των ρυθμίσεων χάρτη (απενεργοποιημένο = χρήση προεπιλεγμένων ρυθμίσεων)
+<QualityBuilder.RebuildGaveUp>Το QualityBuilder εγκατέλειψε το {0} μετά από {1} προσπάθειες ανακατασκευής (τελευταία ποιότητα: {2}). Το κτίριο διατηρήθηκε
+
+Polish
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Włącz Quality Builder
+<QualityBuilderOn.Desc>Aktualna jakość: {0}. Włącz budowanie obiektów przez wykwalifikowanych robotników
+<QualityBuilderOff.Label>Wyłącz Quality Builder
+<QualityBuilderOff.Desc>Aktualna jakość: {0}. Wyłącz budowanie obiektów przez wykwalifikowanych robotników
+<QualityBuilder.SelectedSettings>Wybrane ustawienia
+<QualityBuilder.CurrentMap>Aktualna mapa
+<QualityBuilder.Global>Ustawienia domyślne
+<QualityBuilder.EnableByDefault>Włącz QualityBuilder domyślnie
+<QualityBuilder.IgnoreAtSkill>Ignoruj QualityBuilder przy poziomie umiejętności {0}
+<QualityBuilder.MinSkill>Budowy wysokiej jakości wymagają poziomu umiejętności budowlanych {0} (najlepszy budowniczy: {1})
+<QualityBuilder.MinSkillDiff>Zezwól na budowniczych o poziomie umiejętności do {0} niższym od najlepszego budowniczego
+<QualityBuilder.MinQuality>Domyślna minimalna jakość
+<QualityBuilder.OverrideBestBuilder>Zastąp najlepszego budowniczego
+<QualityBuilder.UseMapSettings>Użyj tych ustawień mapy (wyłączone = użyj ustawień domyślnych)
+<QualityBuilder.RebuildGaveUp>QualityBuilder zrezygnował z {0} po {1} próbach przebudowy (ostatnia jakość: {2}). Budynek został zachowany
+
+Hungarian
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Quality Builder beállítása
+<QualityBuilderOn.Desc>Aktuális minőség: {0}. Épületek beállítása képzett munkások számára
+<QualityBuilderOff.Label>Quality Builder kikapcsolása
+<QualityBuilderOff.Desc>Aktuális minőség: {0}. Épületek beállításának megszüntetése képzett munkások számára
+<QualityBuilder.SelectedSettings>Kiválasztott beállítások
+<QualityBuilder.CurrentMap>Aktuális térkép
+<QualityBuilder.Global>Alapértelmezett beállítások
+<QualityBuilder.EnableByDefault>A QualityBuilder alapértelmezett engedélyezése
+<QualityBuilder.IgnoreAtSkill>A QualityBuilder figyelmen kívül hagyása {0} képzettségi szintnél
+<QualityBuilder.MinSkill>A minőségi építkezéshez {0} építési képzettség szükséges (legjobb építő: {1})
+<QualityBuilder.MinSkillDiff>A legjobb építőtől legfeljebb {0} képességszinttel alacsonyabb képességű építők engedélyezése
+<QualityBuilder.MinQuality>Alapértelmezett minimális minőség
+<QualityBuilder.OverrideBestBuilder>A legjobb építő felülírása a következővel:
+<QualityBuilder.UseMapSettings>Ezeknek a térképbeállításoknak a használata (ki = az alapértelmezett beállítások használata)
+<QualityBuilder.RebuildGaveUp>A QualityBuilder {1} újjáépítési kísérlet után feladta a {0} épületet (utolsó minőség: {2}). Az épület megmaradt
+
+Tagalog
+<QualityBuilder>Tagabuo ng Kalidad
+<QualityBuilderCommand.Label>Tagabuo ng Kalidad
+<QualityBuilderOn.Label>Itakda ang Tagabuo ng Kalidad
+<QualityBuilderOn.Desc>Kasalukuyang kalidad: {0}. Itakda ang mga gusali para sa mga bihasang manggagawa
+<QualityBuilderOff.Label>Alisin ang Tagabuo ng Kalidad
+<QualityBuilderOff.Desc>Kasalukuyang kalidad: {0}. Alisin ang mga gusali para sa mga bihasang manggagawa
+<QualityBuilder.SelectedSettings>Piniling mga setting
+<QualityBuilder.CurrentMap>Kasalukuyang mapa
+<QualityBuilder.Global>Default na mga setting
+<QualityBuilder.EnableByDefault>I-enable ang QualityBuilder bilang default
+<QualityBuilder.IgnoreAtSkill>Balewalain ang QualityBuilder sa kasanayan na {0}
+<QualityBuilder.MinSkill>Ang pagtatayo ng kalidad ay nangangailangan ng kasanayan sa konstruksyon na {0} (pinakamahusay na tagabuo: {1})
+<QualityBuilder.MinSkillDiff>Payagan ang mga tagabuo na may kasanayan na hanggang {0} na antas na mas mababa kaysa sa pinakamahusay na tagabuo
+<QualityBuilder.MinQuality>Default na pinakamababang kalidad
+<QualityBuilder.OverrideBestBuilder>Pawalang-bisa sa pinakamahusay na tagabuo gamit ang
+<QualityBuilder.UseMapSettings>Gamitin ang mga setting ng mapa na ito (off = gamitin ang default na mga setting)
+<QualityBuilder.RebuildGaveUp>Sumuko ang QualityBuilder sa {0} matapos ang {1} pagtatangkang muling buuin (huling kalidad: {2}). Nanatili ang gusali
+
+Turkish
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Quality Builder'ı etkinleştir
+<QualityBuilderOn.Desc>Mevcut kalite: {0}. Yetenekli işçiler için binaları ayarla
+<QualityBuilderOff.Label>Quality Builder'ı devre dışı bırak
+<QualityBuilderOff.Desc>Mevcut kalite: {0}. Yetenekli işçiler için binaları devre dışı bırak
+<QualityBuilder.SelectedSettings>Seçili ayarlar
+<QualityBuilder.CurrentMap>Mevcut harita
+<QualityBuilder.Global>Varsayılan ayarlar
+<QualityBuilder.EnableByDefault>QualityBuilder'ı varsayılan olarak etkinleştir
+<QualityBuilder.IgnoreAtSkill>{0} beceri seviyesinde QualityBuilder'ı yok say
+<QualityBuilder.MinSkill>Kaliteli yapılar {0} inşaat becerisi gerektirir (en iyi inşaatçı: {1})
+<QualityBuilder.MinSkillDiff>En iyi inşaatçının {0} beceri seviyesine kadar altındaki inşaatçılara izin ver
+<QualityBuilder.MinQuality>Varsayılan minimum kalite
+<QualityBuilder.OverrideBestBuilder>En iyi inşaatçıyı şununla geçersiz kıl
+<QualityBuilder.UseMapSettings>Bu harita ayarlarını kullan (kapalı = varsayılan ayarları kullan)
+<QualityBuilder.RebuildGaveUp>QualityBuilder, {1} yeniden inşa denemesinden sonra {0}'dan vazgeçti (son kalite: {2}). Bina korundu
+
+Norwegian
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Aktiver Quality Builder
+<QualityBuilderOn.Desc>Gjeldende kvalitet: {0}. Angi bygninger for dyktige arbeidere
+<QualityBuilderOff.Label>Deaktiver Quality Builder
+<QualityBuilderOff.Desc>Gjeldende kvalitet: {0}. Deaktiver bygninger for dyktige arbeidere
+<QualityBuilder.SelectedSettings>Valgte innstillinger
+<QualityBuilder.CurrentMap>Gjeldende kart
+<QualityBuilder.Global>Standardinnstillinger
+<QualityBuilder.EnableByDefault>Aktiver QualityBuilder som standard
+<QualityBuilder.IgnoreAtSkill>Ignorer QualityBuilder ved ferdighetsnivå {0}
+<QualityBuilder.MinSkill>Kvalitetsbygg krever byggeferdighet {0} (beste byggmester: {1})
+<QualityBuilder.MinSkillDiff>Tillat byggere opptil {0} ferdighetsnivåer under den beste byggmesteren
+<QualityBuilder.MinQuality>Standard minimumskvalitet
+<QualityBuilder.OverrideBestBuilder>Overstyr den beste byggmesteren med
+<QualityBuilder.UseMapSettings>Bruk disse kartinnstillingene (av = bruk standardinnstillinger)
+<QualityBuilder.RebuildGaveUp>QualityBuilder ga opp {0} etter {1} gjenoppbyggingsforsøk (siste kvalitet: {2}). Bygningen ble beholdt
+
+Hebrew
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>בונה איכות
+<QualityBuilderOn.Label>הגדר בונה איכות
+<QualityBuilderOn.Desc>איכות נוכחית: {0}. הגדר מבנים לעובדים מיומנים
+<QualityBuilderOff.Label>בטל הגדרת בונה איכות
+<QualityBuilderOff.Desc>איכות נוכחית: {0}. בטל הגדרת מבנים לעובדים מיומנים
+<QualityBuilder.SelectedSettings>הגדרות נבחרות
+<QualityBuilder.CurrentMap>המפה הנוכחית
+<QualityBuilder.Global>הגדרות ברירת מחדל
+<QualityBuilder.EnableByDefault>הפעל את QualityBuilder כברירת מחדל
+<QualityBuilder.IgnoreAtSkill>התעלם מ-QualityBuilder ברמת מיומנות {0}
+<QualityBuilder.MinSkill>בנייה באיכות גבוהה דורשת מיומנות בנייה {0} (הבונה הטוב ביותר: {1})
+<QualityBuilder.MinSkillDiff>אפשר בונים עם רמת מיומנות הנמוכה ב-{0} רמות לכל היותר מהבונה הטוב ביותר
+<QualityBuilder.MinQuality>איכות מינימלית כברירת מחדל
+<QualityBuilder.OverrideBestBuilder>עקוף את הבונה הטוב ביותר באמצעות
+<QualityBuilder.UseMapSettings>השתמש בהגדרות המפה הללו (כבוי = השתמש בהגדרות ברירת המחדל)
+<QualityBuilder.RebuildGaveUp>QualityBuilder ויתר על {0} לאחר {1} ניסיונות בנייה מחדש (איכות אחרונה: {2}). המבנה נשמר
+
+Irish
+<QualityBuilder>Tógálaí Cáilíochta
+<QualityBuilderCommand.Label>Tógálaí Cáilíochta
+<QualityBuilderOn.Label>Socraigh Tógálaí Cáilíochta
+<QualityBuilderOn.Desc>Cáilíocht reatha: {0}. Socraigh foirgnimh do lucht oibre oilte
+<QualityBuilderOff.Label>Ná socraigh Tógálaí Cáilíochta
+<QualityBuilderOff.Desc>Cáilíocht reatha: {0}. Ná socraigh foirgnimh do lucht oibre oilte
+<QualityBuilder.SelectedSettings>Socruithe roghnaithe
+<QualityBuilder.CurrentMap>An léarscáil reatha
+<QualityBuilder.Global>Socruithe réamhshocraithe
+<QualityBuilder.EnableByDefault>Cuir QualityBuilder i ngníomh go réamhshocraithe
+<QualityBuilder.IgnoreAtSkill>Neamhaird a dhéanamh ar QualityBuilder ag scil {0}
+<QualityBuilder.MinSkill>Teastaíonn scil tógála {0} le haghaidh tógálacha cáilíochta (an tógálaí is fearr: {1})
+<QualityBuilder.MinSkillDiff>Ceadaigh tógálaithe le suas le {0} leibhéal scile faoi bhun an tógálaí is fearr
+<QualityBuilder.MinQuality>Íoschaighdeán réamhshocraithe
+<QualityBuilder.OverrideBestBuilder>Forchuir an tógálaí is fearr le
+<QualityBuilder.UseMapSettings>Bain úsáid as na socruithe mapa seo (as = bain úsáid as socruithe réamhshocraithe)
+<QualityBuilder.RebuildGaveUp>Thug QualityBuilder suas ar {0} tar éis {1} iarracht atógála (an caighdeán deireanach: {2}). Coinníodh an foirgneamh
+
+Italian
+<QualityBuilder>QualityBuilder
+<QualityBuilderCommand.Label>Quality Builder
+<QualityBuilderOn.Label>Attiva Quality Builder
+<QualityBuilderOn.Desc>Qualità attuale: {0}. Imposta gli edifici per lavoratori qualificati
+<QualityBuilderOff.Label>Disattiva Quality Builder
+<QualityBuilderOff.Desc>Qualità attuale: {0}. Disattiva gli edifici per lavoratori qualificati
+<QualityBuilder.SelectedSettings>Impostazioni selezionate
+<QualityBuilder.CurrentMap>Mappa attuale
+<QualityBuilder.Global>Impostazioni predefinite
+<QualityBuilder.EnableByDefault>Abilita QualityBuilder per impostazione predefinita
+<QualityBuilder.IgnoreAtSkill>Ignora QualityBuilder al livello di abilità {0}
+<QualityBuilder.MinSkill>Le costruzioni di qualità richiedono un livello di abilità nella costruzione pari a {0} (miglior costruttore: {1})
+<QualityBuilder.MinSkillDiff>Consenti costruttori con un livello di abilità fino a {0} inferiore a quello del miglior costruttore
+<QualityBuilder.MinQuality>Qualità minima predefinita
+<QualityBuilder.OverrideBestBuilder>Sostituisci il miglior costruttore con
+<QualityBuilder.UseMapSettings>Usa queste impostazioni della mappa (disattivato = usa le impostazioni predefinite)
+<QualityBuilder.RebuildGaveUp>QualityBuilder ha rinunciato a {0} dopo {1} tentativi di ricostruzione (ultima qualità: {2}). L'edificio è stato mantenuto
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
