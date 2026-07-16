@@ -25,4 +25,8 @@
 	<QualityBuilder.UseMapSettings>Use these map settings (off = use default settings)</QualityBuilder.UseMapSettings>
 	<QualityBuilder.MaxRebuildAttempts>Give up after {0} failed rebuild attempts (∞ = never give up)</QualityBuilder.MaxRebuildAttempts>
 	<QualityBuilder.RebuildGaveUp>QualityBuilder gave up on {0} after {1} rebuild attempts (last quality: {2}). The building was kept. You can change this limit in the mod settings.</QualityBuilder.RebuildGaveUp>
+	<QualityBuilder.ExcludeMechs>Mechanoids never do skilled builds</QualityBuilder.ExcludeMechs>
+	<QualityBuilder.ExcludeMechsTooltip>Mechanoids are excluded from the best-builder skill calculation and cannot take quality-designated construction. Manually prioritized (forced) orders still work. Useful when you want to train your colonists' Construction on quality builds instead of letting mechs take them.</QualityBuilder.ExcludeMechsTooltip>
+	<QualityBuilder.GizmoOnBlueprintsOnly>Show quality gizmo only on blueprints/frames</QualityBuilder.GizmoOnBlueprintsOnly>
+	<QualityBuilder.GizmoOnBlueprintsOnlyTooltip>Hides the QualityBuilder toggle gizmo and its right-click quality menu on finished buildings, restoring the pre-finished-buildings behavior. Blueprints and in-progress frames are unaffected. Existing designations and rebuild cycles keep working.</QualityBuilder.GizmoOnBlueprintsOnlyTooltip>
 </LanguageData>

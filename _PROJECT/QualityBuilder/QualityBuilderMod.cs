@@ -162,6 +162,14 @@ namespace QualityBuilder
             currentSelectedSetting.maxQualityRebuildAttempts = newRebuildSliderPos >= UnlimitedRebuildAttemptsSliderPos
                 ? QualityBuilderModSettings.UnlimitedRebuildAttempts
                 : newRebuildSliderPos;
+            // Mechanoids never do skilled builds (both scopes resolved via currentSelectedSetting).
+            bool excludeMechs = currentSelectedSetting.excludeMechsFromSkilledBuilds;
+            firstRowList.CheckboxLabeled("QualityBuilder.ExcludeMechs".Translate(), ref excludeMechs, "QualityBuilder.ExcludeMechsTooltip".Translate());
+            currentSelectedSetting.excludeMechsFromSkilledBuilds = excludeMechs;
+            // Show the quality gizmo only on blueprints/frames (hide it on finished buildings).
+            bool gizmoOnBlueprintsOnly = currentSelectedSetting.gizmoOnBlueprintsOnly;
+            firstRowList.CheckboxLabeled("QualityBuilder.GizmoOnBlueprintsOnly".Translate(), ref gizmoOnBlueprintsOnly, "QualityBuilder.GizmoOnBlueprintsOnlyTooltip".Translate());
+            currentSelectedSetting.gizmoOnBlueprintsOnly = gizmoOnBlueprintsOnly;
 
             firstRowList.End();
             /*

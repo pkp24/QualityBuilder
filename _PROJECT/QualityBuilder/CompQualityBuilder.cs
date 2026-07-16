@@ -109,6 +109,11 @@ namespace QualityBuilder
             }
             else if (parent is Building building && !(building is Frame))
             {
+                // "Show quality gizmo only on blueprints/frames": hide the QB command on
+                // finished buildings entirely (pre-finished-buildings behavior). The underlying
+                // mechanics stay functional; this is UI visibility only.
+                if (QualityBuilderModSettings.getGizmoOnBlueprintsOnly(parent.Map))
+                    yield break;
                 // Finished buildings: keep offering the toggle as long as there's quality
                 // headroom left to build up to. Gating this on `skilled` instead would strand
                 // the player once they toggle off, since the only way back on is this same
@@ -179,8 +184,16 @@ namespace QualityBuilder
                             foreach (object curSelection in selected)
                             {
                                 CompQualityBuilder cmp = QualityBuilder.getCompQualityBuilder(curSelection as ThingWithComps);
-                                if (cmp != null)
-                                    QualityBuilder.setSkilled(curSelection as ThingWithComps, item, true);
+                                if (cmp == null)
+                                    continue;
+                                // "Show quality gizmo only on blueprints/frames": don't retarget
+                                // finished buildings via the right-click menu (they're reachable
+                                // here only when co-selected with a blueprint/frame). Blueprints
+                                // and frames are unaffected.
+                                if (curSelection is Building b && !(b is Frame)
+                                    && QualityBuilderModSettings.getGizmoOnBlueprintsOnly(b.Map))
+                                    continue;
+                                QualityBuilder.setSkilled(curSelection as ThingWithComps, item, true);
                             }
                     }, minQuality, hasFinishedBuilding);
                 }

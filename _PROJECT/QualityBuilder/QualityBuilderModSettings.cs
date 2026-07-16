@@ -17,6 +17,8 @@ namespace QualityBuilder
         int bestConstructionSkillInternal = 0;
         Stopwatch bestConstructorCheckWatch;
         int maxQualityRebuildAttemptsInternal = DefaultMaxQualityRebuildAttempts;
+        bool excludeMechsFromSkilledBuildsInternal = false;
+        bool gizmoOnBlueprintsOnlyInternal = false;
 
         // How many QB-initiated deconstruct->rebuild cycles are allowed before giving up on a
         // building whose min quality the colony can't roll (each cycle burns ~50% materials).
@@ -38,6 +40,8 @@ namespace QualityBuilder
             this.defaultUseQualityBuilder = clone.defaultUseQualityBuilder;
             this.defaultMinQualitySetting = clone.defaultMinQualitySetting;
             this.maxQualityRebuildAttempts = clone.maxQualityRebuildAttempts;
+            this.excludeMechsFromSkilledBuilds = clone.excludeMechsFromSkilledBuilds;
+            this.gizmoOnBlueprintsOnly = clone.gizmoOnBlueprintsOnly;
         }
 
         public Pawn bestConstructorOverride
@@ -76,6 +80,18 @@ namespace QualityBuilder
             set { maxQualityRebuildAttemptsInternal = value; }
         }
 
+        public bool excludeMechsFromSkilledBuilds
+        {
+            get { return excludeMechsFromSkilledBuildsInternal; }
+            set { excludeMechsFromSkilledBuildsInternal = value; }
+        }
+
+        public bool gizmoOnBlueprintsOnly
+        {
+            get { return gizmoOnBlueprintsOnlyInternal; }
+            set { gizmoOnBlueprintsOnlyInternal = value; }
+        }
+
         public void ExposeData()
         {
             Scribe_Values.Look<bool>(ref this.defaultUseQualityBuilderInternal, "defaultUseQBuilder", true);
@@ -84,6 +100,8 @@ namespace QualityBuilder
             Scribe_Values.Look<QualityCategory>(ref this.defaultMinQualitySettingInternal, "desiredMinQuality", QualityCategory.Awful, false);
             Scribe_References.Look<Pawn>(ref this.bestConstructorOverrideInternal, "bestConstructorOverride");
             Scribe_Values.Look<int>(ref this.maxQualityRebuildAttemptsInternal, "qBuilderMaxRebuildAttempts", DefaultMaxQualityRebuildAttempts);
+            Scribe_Values.Look<bool>(ref this.excludeMechsFromSkilledBuildsInternal, "excludeMechsFromSkilledBuilds", false);
+            Scribe_Values.Look<bool>(ref this.gizmoOnBlueprintsOnlyInternal, "gizmoOnBlueprintsOnly", false);
         }
 
         public void resetToDefault()
@@ -95,6 +113,8 @@ namespace QualityBuilder
             this.bestConstructorOverride = null;
             this.bestConstructionSkillInternal = 0;
             this.maxQualityRebuildAttemptsInternal = DefaultMaxQualityRebuildAttempts;
+            this.excludeMechsFromSkilledBuildsInternal = false;
+            this.gizmoOnBlueprintsOnlyInternal = false;
         }
 
         internal static QualityBuilderModSettings getSettings(Map map)
@@ -163,6 +183,16 @@ namespace QualityBuilder
         public static int getMaxQualityRebuildAttempts(Map map)
         {
             return getSettings(map).maxQualityRebuildAttemptsInternal;
+        }
+
+        public static bool getExcludeMechsFromSkilledBuilds(Map map)
+        {
+            return getSettings(map).excludeMechsFromSkilledBuildsInternal;
+        }
+
+        public static bool getGizmoOnBlueprintsOnly(Map map)
+        {
+            return getSettings(map).gizmoOnBlueprintsOnlyInternal;
         }
 
         private static QualityBuilderModSettings fallBack = new QualityBuilderModSettings();

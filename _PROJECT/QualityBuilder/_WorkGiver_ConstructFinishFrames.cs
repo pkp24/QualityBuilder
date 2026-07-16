@@ -83,6 +83,13 @@ namespace QualityBuilder
             Map curMap = pawn.Map;
             // Resolve the map settings once instead of re-scanning the map's components per field.
             QualityBuilderModSettings settings = QualityBuilderModSettings.getSettings(curMap);
+            // Mechanoids never do skilled builds when the setting is on. Checked before the
+            // bestConstructorOverride branch so an override can't re-admit a mech, and before
+            // the skill-threshold logic so a mech is rejected regardless of its fixed skill.
+            // Player-forced jobs never reach here: the WorkGiver Postfix short-circuits on
+            // `forced` before calling this gate.
+            if (settings.excludeMechsFromSkilledBuilds && pawn.RaceProps.IsMechanoid)
+                return false;
             Pawn overridePawn = settings.bestConstructorOverride;
             // A dead/gone/off-map/incapable override must not block all quality construction
             if (overridePawn != null && overridePawn.Spawned && overridePawn.Map == curMap && !overridePawn.Dead && QualityBuilder.pawnCanConstruct(overridePawn))

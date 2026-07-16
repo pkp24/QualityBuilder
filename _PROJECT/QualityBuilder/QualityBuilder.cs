@@ -280,10 +280,16 @@ namespace QualityBuilder
 		public static int getBestConstructorSkill(Map curMap)
 		{
 			int best = 0;
+			bool excludeMechs = QualityBuilderModSettings.getExcludeMechsFromSkilledBuilds(curMap);
 			List<Pawn> pawns = curMap.mapPawns.PawnsInFaction(Faction.OfPlayer);
 			for (int i = 0; i < pawns.Count; i++)
 			{
 				Pawn p = pawns[i];
+				// Mechanoids never anchor the quality-skill pool when the setting is on, so a
+				// colony mech's fixed construction skill can't set the threshold colonists
+				// must meet.
+				if (excludeMechs && p.RaceProps.IsMechanoid)
+					continue;
 				// Only pawns actually available to build may set the quality threshold:
 				// PawnsInFaction also returns unspawned held pawns (cryptosleep caskets,
 				// carried) and imprisoned colonists, and counting a downed/broken best
