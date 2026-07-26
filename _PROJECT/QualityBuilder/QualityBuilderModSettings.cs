@@ -195,6 +195,41 @@ namespace QualityBuilder
             return getSettings(map).gizmoOnBlueprintsOnlyInternal;
         }
 
+        // --- "Default settings" status indicator (settings window) ------------------------------
+        // Whether the global "Default settings" page is what actually drives QualityBuilder on
+        // this map right now. Mirrors the branch in getSettings(Map) above: the map only escapes
+        // the global page by explicitly opting into its own settings. Kept as a separate static
+        // (rather than inline in the settings window) so the indicator's state is assertable
+        // outside OnGUI. Read-only on purpose: GetComponent, not getAndEnsure, so merely drawing
+        // the settings window never creates a map component. A map with no component yet has
+        // never opted in, which is the same answer getAndEnsure would produce.
+        public static bool areDefaultSettingsActive(Map map)
+        {
+            if (map == null)
+                return true; // No map loaded (e.g. main menu): only the global page exists.
+            QualityBuilder_MapComponent mapComp = map.GetComponent<QualityBuilder_MapComponent>();
+            return mapComp == null || !mapComp.useMapSettings;
+        }
+
+        public static string getDefaultSettingsStatusLabel(Map map)
+        {
+            return areDefaultSettingsActive(map)
+                ? "QualityBuilder.DefaultSettingsActive".Translate()
+                : "QualityBuilder.DefaultSettingsInactive".Translate();
+        }
+
+        public static string getDefaultSettingsStatusNote(Map map)
+        {
+            // The settings window is reachable from the main menu, where the "Current map" scope
+            // isn't offered at all -- telling the player to tick a checkbox that isn't there would
+            // be worse than saying nothing, so that case gets its own note.
+            if (map == null)
+                return "QualityBuilder.DefaultSettingsNoMapNote".Translate();
+            return areDefaultSettingsActive(map)
+                ? "QualityBuilder.DefaultSettingsActiveNote".Translate()
+                : "QualityBuilder.DefaultSettingsInactiveNote".Translate();
+        }
+
         private static QualityBuilderModSettings fallBack = new QualityBuilderModSettings();
     }
 }

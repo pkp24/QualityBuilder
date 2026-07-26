@@ -52,6 +52,10 @@ A greyed line under the existing `SelectedSettingsHint`, paired to the light's s
   not affect it. Untick 'Use these map settings' to hand control back."
 - **Active:** "This map is using the Default settings below. Tick 'Use these map settings' on the
   Current map page to give this map its own independent settings."
+- **No map loaded:** "No colony is loaded, so only these Default settings exist right now. Once
+  you load a colony, any map can be switched to its own independent settings." — the settings
+  window is reachable from the main menu, where the scope float menu never offers "Current map";
+  the Active note would point at a checkbox that isn't on screen.
 
 New keys are added to `Languages/English` only; RimWorld falls back to English for the other six
 shipped languages.

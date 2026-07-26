@@ -26,6 +26,15 @@ namespace QualityBuilder
         // Slider position (not a stored value) that represents "unlimited" rebuild attempts.
         private const int UnlimitedRebuildAttemptsSliderPos = 21;
 
+        // Layout of the "Selected settings" row: the left share holds the label + scope button,
+        // the remainder holds the "Default settings" status light.
+        private const float SelectedSettingsRowHeight = 30f;
+        private const float SelectedSettingsSelectorPct = 0.72f;
+        private const float StatusLightSize = 12f;
+        private static readonly Color DefaultSettingsActiveColor = new Color(0.4f, 0.85f, 0.4f);
+        private static readonly Color DefaultSettingsInactiveColor = new Color(0.9f, 0.42f, 0.35f);
+        private static readonly Color StatusLightOutlineColor = new Color(0f, 0f, 0f, 0.6f);
+
         public QualityBuilderMod(ModContentPack content) : base(content)
         {
             QualityBuilder.modInstance = this;
@@ -94,10 +103,12 @@ namespace QualityBuilder
             Listing_Standard firstRowList = new Listing_Standard();
             firstRowList.Begin(inRect);
 
-            if (firstRowList.ButtonTextLabeled("QualityBuilder.SelectedSettings".Translate(), isCurentMapSelected ? "QualityBuilder.CurrentMap".Translate() : "QualityBuilder.Global".Translate()))
-                buildSelectedSettingsFloatMenu();
+            doSelectedSettingsRow(firstRowList);
             GUI.color = new Color(1f, 1f, 1f, 0.6f);
             firstRowList.Label("QualityBuilder.SelectedSettingsHint".Translate());
+            // Spells out what the status light means, so the player doesn't have to guess why the
+            // page they're editing may not be reaching their colony.
+            firstRowList.Label(QualityBuilderModSettings.getDefaultSettingsStatusNote(Find.CurrentMap));
             GUI.color = Color.white;
             firstRowList.Gap(12f);
             // Whether this map uses its own settings; when off, the global "Default settings"
@@ -193,6 +204,55 @@ namespace QualityBuilder
 
             }
             */
+        }
+
+        // "Selected settings [ scope ]" plus the status light beside it. Laid out by hand instead
+        // of via Listing_Standard.ButtonTextLabeled because that helper always consumes the full
+        // column width (label 0-50%, button 50-100%), leaving nowhere to put the light.
+        private void doSelectedSettingsRow(Listing_Standard list)
+        {
+            Rect row = list.GetRect(SelectedSettingsRowHeight);
+            Rect selectorRect = row.LeftPart(SelectedSettingsSelectorPct);
+            Rect labelRect = selectorRect.LeftHalf();
+            Rect buttonRect = selectorRect.RightHalf();
+
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(labelRect, "QualityBuilder.SelectedSettings".Translate());
+            Text.Anchor = TextAnchor.UpperLeft;
+
+            string selectedScope = isCurentMapSelected
+                ? "QualityBuilder.CurrentMap".Translate()
+                : "QualityBuilder.Global".Translate();
+            if (Widgets.ButtonText(buttonRect, selectedScope.Truncate(buttonRect.width - 20f)))
+                buildSelectedSettingsFloatMenu();
+
+            doDefaultSettingsLight(row.RightPart(1f - SelectedSettingsSelectorPct));
+            list.Gap(list.verticalSpacing);
+        }
+
+        // Reports whether the global "Default settings" page is what actually drives the CURRENT
+        // MAP. Deliberately reflects the map's real state rather than whichever page is being
+        // viewed: "I'm editing a page that isn't reaching my colony" is the situation this exists
+        // to surface, and that only shows up while the Default page is selected.
+        private void doDefaultSettingsLight(Rect rect)
+        {
+            Map map = Find.CurrentMap;
+            bool active = QualityBuilderModSettings.areDefaultSettingsActive(map);
+            Color statusColor = active ? DefaultSettingsActiveColor : DefaultSettingsInactiveColor;
+
+            Rect lightRect = new Rect(rect.x + 8f, rect.y + (rect.height - StatusLightSize) / 2f,
+                                      StatusLightSize, StatusLightSize);
+            Widgets.DrawBoxSolidWithOutline(lightRect, statusColor, StatusLightOutlineColor, 1);
+
+            Rect textRect = new Rect(lightRect.xMax + 6f, rect.y, rect.xMax - lightRect.xMax - 6f, rect.height);
+            Color previousColor = GUI.color;
+            GUI.color = statusColor;
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Widgets.Label(textRect, QualityBuilderModSettings.getDefaultSettingsStatusLabel(map));
+            Text.Anchor = TextAnchor.UpperLeft;
+            GUI.color = previousColor;
+
+            TooltipHandler.TipRegion(rect, QualityBuilderModSettings.getDefaultSettingsStatusNote(map));
         }
 
         private string getBestConstructorOverrideName()
